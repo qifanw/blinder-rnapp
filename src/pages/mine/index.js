@@ -1,0 +1,1 @@
+export { Home as Mine } from './home'

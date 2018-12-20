@@ -1,0 +1,1 @@
+export const GENEALOGY_SEARCH_KEY_LIST = "GenealogySearchKeyList";
