@@ -9,7 +9,7 @@ import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/Car
 import {
   Login,
   Mine, MineNews, MineNewsDetail,
-  HomeworkList,
+  HomeworkList,HomeworkDetail,
   ClassList,
 } from './pages'
 import { jump, pop, close, back, popTo, replace, reset } from './router';
@@ -105,9 +105,10 @@ export default class App extends React.Component {
             {/* 登录相关 */}
             {/* <NavScene key="/project/detail" component={ProjectDetail} title="项目详情" /> */}
             {/* 作业相关 */}
-            {/* <NavScene key="/group/list" component={GroupList} title="班组列表" /> */}
+            <NavScene key="/homework/list" component={HomeworkList} title="作业列表" />
+            <NavScene key="/homework/detail" component={HomeworkDetail} title="作业详情" />
             {/* 班级相关 */}
-            {/* <NavScene key="/worker/list" component={WorkerList} title="班组详情" /> */}
+            {/* <NavScene key="/classes/list" component={ClassList} title="班级列表" /> */}
             {/* 我的 相关 */}
             {/* <NavScene key="/mine/account/detail" component={AccountDetail} title="账户详情" />
             <NavScene key="/mine/account/birthplace" component={AccountBirthplace} title="籍贯" />

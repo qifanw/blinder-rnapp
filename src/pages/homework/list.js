@@ -12,7 +12,7 @@ export class HomeworkList extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text> HomeworkList </Text>
+                <Text onPress={() => jump('/homework/detail')}> HomeworkList </Text>
             </View>
         )
     }
