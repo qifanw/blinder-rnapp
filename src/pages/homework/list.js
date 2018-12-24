@@ -12,7 +12,8 @@ export class HomeworkList extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text onPress={() => jump('/homework/detail')}> HomeworkList </Text>
+                <Text onPress={() => jump('/homework/detail')}> jump to HomeworkDetail </Text>
+                <Text onPress={() => jump('/homework/recode')}> jump to audioStemp </Text>
             </View>
         )
     }

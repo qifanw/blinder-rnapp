@@ -9,7 +9,7 @@ import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/Car
 import {
   Login,
   Mine, MineNews, MineNewsDetail,
-  HomeworkList,HomeworkDetail,
+  HomeworkList,HomeworkDetail,AudioExample,
   ClassList,
 } from './pages'
 import { jump, pop, close, back, popTo, replace, reset } from './router';
@@ -44,6 +44,13 @@ export default class App extends React.Component {
         <Text style={{ color: props.focused ? color.c6 : '#999', fontSize: font.f1 }}>{props.title}</Text>
       </View>
     };
+    const customTabIcon = (props) => {
+      return <View style={styles.coustomTabView}>
+        <Image source={props.focused ? props.activeImage : props.image} resizeModel= 'contain' style={{width:80,height:80,marginTop: 0,}} />
+        <View style={{ height: 4 }}></View>
+        <Text style={{ color: props.focused ? color.c6 : '#999', fontSize: font.f1 }}>{props.title}</Text>
+      </View>
+    };
     return (
       <Router>
         <Scene key="root" hideNavBar={true} transitionConfig={() => ({ screenInterpolator: CardStackStyleInterpolator.forHorizontal })}>
@@ -73,7 +80,7 @@ export default class App extends React.Component {
               />
             </Stack>
             {/* 班级列表 */}
-            <Stack key="tab_second" navBar={() => null} title="班级列表" icon={TabIcon} image={require('./images/ic_sy.png')} activeImage={require('./images/ic_sjax.png')}>
+            <Stack key="tab_second" navBar={() => null} title="班级列表" icon={customTabIcon} image={require('./pages/homework/images/胶片盘.png')} activeImage={require('./images/ic_sjax.png')}>
               <NavScene
                 key="/classlist"
                 component={ClassList}
@@ -107,6 +114,7 @@ export default class App extends React.Component {
             {/* 作业相关 */}
             <NavScene key="/homework/list" component={HomeworkList} title="作业列表" />
             <NavScene key="/homework/detail" component={HomeworkDetail} title="作业详情" />
+            <NavScene key="/homework/recode" component={AudioExample} title ="录音"/>
             {/* 班级相关 */}
             {/* <NavScene key="/classes/list" component={ClassList} title="班级列表" /> */}
             {/* 我的 相关 */}
@@ -151,6 +159,15 @@ const styles = StyleSheet.create({
   tabView: {
     alignItems: "center",
     justifyContent: "center"
+  },
+  coustomTabView:{
+    alignItems:'center',
+    backgroundColor: 'white',
+    position: 'absolute',
+    bottom: 0,
+    width: 100,
+    height:100,
+    borderRadius:50
   },
   text: {
     color: color["c2"],
