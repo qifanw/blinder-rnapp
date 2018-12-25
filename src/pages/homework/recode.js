@@ -8,23 +8,39 @@ import {
     TouchableHighlight,
     Platform,
     PermissionsAndroid,
+    Image,
+    TouchableOpacity
 } from 'react-native';
-
-import Video from 'react-native-video';
+import { RowFunc, Dialog, } from '../../components';
 import { AudioRecorder, AudioUtils } from 'react-native-audio';
-
+import { RNCamera } from 'react-native-camera';
+const PendingView = () => (
+    <View
+        style={{
+            flex: 1,
+            backgroundColor: 'lightgreen',
+            justifyContent: 'center',
+            alignItems: 'center',
+        }}
+    >
+        <Text>Waiting</Text>
+    </View>
+);
 export class AudioExample extends Component {
-
-    state = {
-        currentTime: 0.0,
-        recording: false,
-        paused: false,
-        stoppedRecording: false,
-        finished: false,
-        audioPath: AudioUtils.DocumentDirectoryPath + '/test.aac',
-        hasPermission: undefined,
-    };
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            cameraType: RNCamera.Constants.Type.back,
+            pictureUri:'',
+            currentTime: 0.0,
+            recording: false,
+            paused: false,
+            stoppedRecording: false,
+            finished: false,
+            audioPath: AudioUtils.DocumentDirectoryPath + '/test.aac',
+            hasPermission: undefined,
+        };
+    }
     prepareRecordingPath(audioPath) {
         AudioRecorder.prepareRecordingAtPath(audioPath, {
             SampleRate: 22050,
@@ -137,25 +153,6 @@ export class AudioExample extends Component {
         this.setState({
             pause: !this.state.pause
         })
-        // These timeouts are a hacky workaround for some issues with react-native-sound.
-        // See https://github.com/zmxv/react-native-sound/issues/89.
-        // setTimeout(() => {
-        //     var sound = new Sound(this.state.audioPath, '', (error) => {
-        //         if (error) {
-        //             console.log('failed to load the sound', error);
-        //         }
-        //     });
-
-        //     setTimeout(() => {
-        //         sound.play((success) => {
-        //             if (success) {
-        //                 console.log('successfully finished playing');
-        //             } else {
-        //                 console.log('playback failed due to audio decoding errors');
-        //             }
-        //         });
-        //     }, 100);
-        // }, 100);
     }
 
     async _record() {
@@ -191,23 +188,65 @@ export class AudioExample extends Component {
 
         return (
             <View style={styles.container}>
-                <View style={styles.controls}>
-                    <Video source={{ uri:'http://www.ytmp3.cn/down/56158.mp3'}}
-                           ref = {(ref)=>{this.player=ref}}
-                           paused={this.state.paused}//暂停
-                           onBuffer={this.onBuffer}
-                           onError={this.videoError}
-                           style={styles.backgroundVideo}
-                    />
+                <RNCamera
+                    style={styles.preview}
+                    type={this.state.cameraType}
+                    // flashMode={RNCamera.Constants.FlashMode.on}
+                    permissionDialogTitle={'Permission to use camera'}
+                    permissionDialogMessage={'We need your permission to use your camera phone'}
+                >
+                    {({ camera, status }) => {
+                        if (status !== 'READY') return <PendingView />;
+                        return (
+                            <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
+                                <TouchableOpacity onPress={() => this.takePicture(camera)} style={styles.capture}>
+                                    <Text style={{ fontSize: 14 }}> SNAP </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.switchCamera(camera)} style={styles.capture}>
+                                    <Text style={{ fontSize: 14 }}> switchCamera </Text>
+                                </TouchableOpacity>
+                            </View>
+                        );
+                    }}
+                </RNCamera>
+                <Image source={{ uri: this.state.pictureUri }} style = {{width:200,height: 150}} />
+                {/* <View style={styles.controls}>
                     {this._renderButton("RECORD", () => { this._record() }, this.state.recording)}
                     {this._renderButton("PLAY", () => { this._play() })}
                     {this._renderButton("STOP", () => { this._stop() })}
                     {/* {this._renderButton("PAUSE", () => {this._pause()} )} */}
-                    {this._renderPauseButton(() => { this.state.paused ? this._resume() : this._pause() })}
+                    {/* {this._renderPauseButton(() => { this.state.paused ? this._resume() : this._pause() })}
                     <Text style={styles.progressText}>{this.state.currentTime}s</Text>
-                </View>
+                </View> */} 
             </View>
         );
+    }
+
+    //切换前后摄像头
+    switchCamera() {
+        var state = this.state;
+        if (state.cameraType == RNCamera.Constants.Type.back) {
+            state.cameraType = RNCamera.Constants.Type.front;
+        } else {
+            state.cameraType = RNCamera.Constants.Type.back;
+        }
+        this.setState(state);
+    }
+
+    //拍摄照片
+    
+    takePicture = async function(camera) {
+        const options = { quality: 0.01, base64: true, doNotSave:false}
+        const data = await camera.takePictureAsync(options)
+        Dialog.show('', "拍照成功！图片保存地址：\n" + data.uri, [{ text: "确认", onPress: () => { } }])
+        this.setState({
+            pictureUri: data.uri
+        })
+        // this.camera.capture(options)
+        //     .then(function (data) {
+        //         Dialog.show('',"拍照成功！图片保存地址：\n" + data.uri, [{ text: "确认", onPress: () => { } }])
+        //     })
+        //     .catch(err => console.error(err));
     }
 }
 
@@ -240,9 +279,23 @@ var styles = StyleSheet.create({
         fontSize: 20,
         color: "#B81F00"
     },
-    backgroundVideo:{
+    backgroundVideo: {
         width: 375,
         height: 200
-    }
+    }, 
+    preview: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
+    capture: {
+        flex: 0,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        padding: 15,
+        paddingHorizontal: 20,
+        alignSelf: 'center',
+        margin: 20,
+    },
 
 });

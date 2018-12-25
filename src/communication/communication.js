@@ -109,8 +109,6 @@ function syncUserInfo() {
     service.$setUserInfo({
       userId: result.userId || '',
       token: result.token || '',
-      branchNo: result.branchNo || '',
-      fundAccount: result.fundAccount || '',
       appVersion: ReactModule.v
     });
     instance.syncUserStatus = false;

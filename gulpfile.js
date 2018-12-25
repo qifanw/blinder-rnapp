@@ -13,23 +13,11 @@ const distpath = './dist';
 const releasepath = './release'
 const config = {
   ios: {
-    maojiuhui: {
-      zipname: 'ios-mjh.zip'
-    },
-    yunmatong: {
-      zipname: 'ios-ymt.zip'
-    },
     mingonghui: {
-      zipname: 'ios-mgh.zip'
+      zipname: 'ios.zip'
     }
   },
   android: {
-    maojiuhui: {
-      zipname: 'android-rn.zip'
-    },
-    yunmatong: {
-      zipname: 'android-rn.zip'
-    },
     mingonghui: {
       zipname: 'android-rn.zip'
     }

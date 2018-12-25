@@ -9,30 +9,17 @@ import {
     Image,
     Animated,
     Slider,
+    NetInfo,
 } from 'react-native';
-import { RowFunc, Dialog,} from '../../components';
 import Video from 'react-native-video';
-// import { RNCamera } from 'react-native-camera';
-// const PendingView = () => (
-//     <View
-//         style={{
-//             flex: 1,
-//             backgroundColor: 'lightgreen',
-//             justifyContent: 'center',
-//             alignItems: 'center',
-//         }}
-//     >
-//         <Text>Waiting</Text>
-//     </View>
-// );
+
 export class HomeworkDetail extends Component {
     //构造函数
     constructor(props) {
         super(props);
         // this.spinValue = new Animated.Value(0)
         this.state = {
-            // cameraType: RNCamera.constants.Type.back
-            // pictureUri:''
+            
             backgroundPic:'',//背景图片
             file_duration:10.0, //歌曲时间
             pause:false,     //播放/暂停
@@ -41,6 +28,12 @@ export class HomeworkDetail extends Component {
             duration:10.0,
             isplayBtn:require('./images/播放.png')  //播放暂停按钮背景图
         };
+    }
+    componentDidMount(){
+
+        NetInfo.isConnected.fetch().done((isConnected) => {
+            console.log('First, is ' + (isConnected ? 'online' : 'offline'));
+        });
     }
     playAction = () =>{
         this.setState({
@@ -96,56 +89,12 @@ export class HomeworkDetail extends Component {
                     </View>
                     
                 </View>
-                {/* <RNCamera
-                    style={styles.preview}
-                    type={RNCamera.Constants.Type.back}
-                    zoom={0.5}
-                    // flashMode={RNCamera.Constants.FlashMode.on}
-                    permissionDialogTitle={'Permission to use camera'}
-                    permissionDialogMessage={'We need your permission to use your camera phone'}
-                >
-                    {({ camera, status }) => {
-                        if (status !== 'READY') return <PendingView />;
-                        return (
-                            <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.takePicture(camera)} style={styles.capture}>
-                                    <Text style={{ fontSize: 14 }}> SNAP </Text>
-                                </TouchableOpacity>
-                            </View>
-                        );
-                    }}
-                </RNCamera>
-                <Image source={{ uri: this.state.pictureUri }} style = {{width:200,height: 150}} /> */}
+                
             </View>
         );
     }
 
-    // //切换前后摄像头
-    // switchCamera() {
-    //     var state = this.state;
-    //     if (state.cameraType === RNCamera.constants.Type.back) {
-    //         state.cameraType = RNCamera.constants.Type.front;
-    //     } else {
-    //         state.cameraType = RNCamera.constants.Type.back;
-    //     }
-    //     this.setState(state);
-    // }
-
-    // //拍摄照片
     
-    // takePicture = async function(camera) {
-    //     const options = { quality: 0.01, base64: true, doNotSave:false}
-    //     const data = await camera.takePictureAsync(options)
-    //     Dialog.show('', "拍照成功！图片保存地址：\n" + data.uri, [{ text: "确认", onPress: () => { } }])
-    //     this.setState({
-    //         pictureUri: data.uri
-    //     })
-    //     // this.camera.capture(options)
-    //     //     .then(function (data) {
-    //     //         Dialog.show('',"拍照成功！图片保存地址：\n" + data.uri, [{ text: "确认", onPress: () => { } }])
-    //     //     })
-    //     //     .catch(err => console.error(err));
-    // }
 }
 
 const styles = StyleSheet.create({
@@ -153,20 +102,6 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         backgroundColor: 'white',
-    },
-    preview: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-    },
-    capture: {
-        flex: 0,
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        padding: 15,
-        paddingHorizontal: 20,
-        alignSelf: 'center',
-        margin: 20,
     },
     VideoView:{
         marginTop: 0,

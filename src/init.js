@@ -26,8 +26,6 @@ export function initRN(props) {
     service.$setUserInfo({
       userId: userInfo.userId || '',
       token: userInfo.token || '',
-      branchNo: userInfo.branchNo || '',
-      fundAccount: userInfo.fundAccount || '',
       appVersion: APP_V,
     });
 
