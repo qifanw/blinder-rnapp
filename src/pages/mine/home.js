@@ -151,7 +151,7 @@ export class Home extends Component {
             {roleInfo.role == 1 ? <RowFunc source={require('./images/ic_wdewm.png')} text="我的二维码" onPress={() => this._jumpQRcodeAction(userInfo)} hasBottomBorder={false} /> : null}
           </View>
           <View style={styles.subcontainer}>
-            <RowFunc source={require('./images/ic_ye.png')} text="余额(元)" onPress={() => jumpApp('/assets/balance-detail')} desc={balance ? formatMoney(balance) : '--'} descStyle={styles.descstyle} />
+            <RowFunc source={require('./images/ic_ye.png')} text="设置" onPress={() => jump('/mine/setting')} />
             <RowFunc source={require('./images/ic_wdyhk.png')} text="我的银行卡" onPress={() => jumpApp('/user/bank-list')} />
             <RowFunc source={require('./images/ic_wdgzk.png')} text="我的工资卡" onPress={() => jump('/mine/salarycard')} />
             <RowFunc source={require('./images/ic_wdzd.png')} text="我的账单" onPress={() => jumpApp('/assets/order-record-list')} hasBottomBorder={false} />

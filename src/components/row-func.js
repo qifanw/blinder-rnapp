@@ -10,10 +10,10 @@ export class RowFunc extends Component {
   }
 
   render() {
-    const {onPress = () => {}, source, text = "", desc = "", textStyle = {}, descStyle = {}, hasRightArrow = true, hasBottomBorder = true ,maxLine =0 ,disabled=false} = this.props;
+    const {onPress = () => {}, sourceRight,source, text = "", desc = "", containerStyle={},textStyle = {}, descStyle = {}, hasRightArrow = true, hasBottomBorder = true ,maxLine =0 ,disabled=false} = this.props;
 
     return (
-      <TouchableOpacity   disabled={disabled} style={[styles.container, hasBottomBorder ? {} : {borderBottomWidth: 0}]} onPress={() => onPress()} activeOpacity={1}>
+      <TouchableOpacity   disabled={disabled} style={[styles.container,containerStyle, hasBottomBorder ? {} : {borderBottomWidth: 0}]} onPress={() => onPress()} activeOpacity={1}>
         { source ? <Image style={styles.icon} source={source} /> : null}
 
         <View style={styles.textView}>
@@ -22,6 +22,7 @@ export class RowFunc extends Component {
         </View>
 
         {hasRightArrow && <Image style={styles.rightIcon} source={require('./images/ic_ejjt.png')} />}
+       { sourceRight ? <Image style={[styles.icon,sourceRightStyles]} source={sourceRight} /> : null}
       </TouchableOpacity>
     )
   }
