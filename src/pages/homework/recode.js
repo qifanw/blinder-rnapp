@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { RowFunc, Dialog, } from '../../components';
 import { AudioRecorder, AudioUtils } from 'react-native-audio';
-import { RNCamera } from 'react-native-camera';
+// import { RNCamera } from 'react-native-camera';
 const PendingView = () => (
     <View
         style={{

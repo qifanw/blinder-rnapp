@@ -140,14 +140,14 @@ export class Home extends Component {
 
           <TopView name={userInfo.clientName} mobile={userInfo.mobile} imageUrl={roleInfo.headPortraitsUrl} userInfo={userInfo} workerInfo={roleInfo} />
           <View style={styles.subcontainer}>
-            <RowFunc source={require('./images/ic_wdjs.png')} text="我的角色" onPress={() => jump('/mine/role', { role: roleInfo.role })} desc={roleInfo.role ? roleStr : '--'} descStyle={styles.descstyle} />
+            <RowFunc source={require('./images/ic_wdjs.png')} text="班級管理" onPress={() => jump('/class/administration')} />
             {/* jump('/mine/account/authentication') 身份认证待开发 */}
             {/* <RowFunc source={require('./images/ic_sfrz.png')} text="身份认证" onPress = {() =>  this._noFinishing()} desc=" 已认证" descStyle={styles.descstyle}/>  */}
             {roleInfo.role == 1 ? <RowFunc source={require('./images/ic_wdgz.png')} text="我的工种" onPress={() => jump('/mine/skill')} desc={workerKindArr.join(' ') ? '已选' : "未选"} descStyle={styles.descstyle} /> : null}
             {roleInfo.role == 1 ? <RowFunc source={require('./images/ic_wdzs.png')} text="我的证书" onPress={() => jump('/mine/certificate/list', { hasHeader: false, userId: userInfo.userId })} /> : null}
             {roleInfo.role == 1 ? <RowFunc source={require('./images/ic_wdxs.png')} text="我的协商" onPress={() => jump('/negotiate/list', { userId: userInfo.userId, roleId: 4 })} /> : null}
-            <RowFunc source={require('./images/ic_wdgzxg.png')} text="我的工作" onPress={() => jump('/mine/myJob', { selfAssessment: roleInfo.selfAssessment, userId: userInfo.userId })} />
-            {roleInfo.role == 1 ? <RowFunc source={require('./images/ic_wdht.png')} text="我的合同" onPress={() => jump('/mine/contract/list')} /> : null}
+            <RowFunc source={require('./images/ic_wdgzxg.png')} text="登录验证码" onPress={() => jump('/login/login-code')} />
+            {roleInfo.role == 1 ? <RowFunc source={require('./images/ic_wdht.png')} text="登录验证码" onPress={() => jump('/login/login-code')} /> : null}
             {roleInfo.role == 1 ? <RowFunc source={require('./images/ic_wdewm.png')} text="我的二维码" onPress={() => this._jumpQRcodeAction(userInfo)} hasBottomBorder={false} /> : null}
           </View>
           <View style={styles.subcontainer}>
