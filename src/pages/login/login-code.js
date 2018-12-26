@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {
-    View, Text, StyleSheet, TextInput
+    View, Text, StyleSheet, TextInput, ScrollView
 } from 'react-native';
 import { gap, color, font } from '../../common/standard';
 import { jump, init, refresh } from '../../router'
 import { initRN } from '../../init';
+import VerifyCode from "./VerifyCodeInput";
 export class LoginCode extends Component {
     constructor(props) {
         super(props);
@@ -14,8 +15,14 @@ export class LoginCode extends Component {
             loginCode1: "",
             loginCode2: "",
             loginCode3: "",
+            verifyCode: ''
         }
+        this.onChangeVerifyCode = this.onChangeVerifyCode.bind(this);
     }
+    onChangeVerifyCode(text) {
+        console.log("登陸--value-" + text)
+    }
+
     handleInputChange(value) {
         let code = value.slice(-1)
         console.log("登陸--value-" + value)
@@ -40,8 +47,18 @@ export class LoginCode extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.text}>验证码已发送至1234567890</Text>
-
+                {/* 验证码输入框 */}
                 <View style={styles.inputView}>
+
+                    <VerifyCode
+                        ref={(ref) => { this.verifyCode = ref; }}
+                        verifyCodeLength={4}
+                        onChangeText={text => this.onChangeVerifyCode(text)}
+                    />
+
+                </View>
+
+                {/* <View style={styles.inputView}>
                     <View>
                         <TextInput style={styles.input}
                             defaultValue='地址'
@@ -69,7 +86,7 @@ export class LoginCode extends Component {
                         <Text style={styles.textCode}>{loginCode}</Text>
                         <Text style={styles.textCode}>{loginCode2}</Text>
                     </View>
-                </View>
+                </View> */}
             </View>
         )
     }
@@ -79,6 +96,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+
     text: {
         color: color.c70,
         fontSize: font.f4,
@@ -88,8 +106,8 @@ const styles = StyleSheet.create({
     inputView: {
         flex: 1,
         marginTop: 28,
-        marginLeft: 74,
-        marginRight: 74,
+        // marginLeft: 74,
+        // marginRight: 74,
     },
     input: {
         color: color.c70,
