@@ -12,204 +12,180 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { RowFunc, Dialog, } from '../../components';
-import { AudioRecorder, AudioUtils } from 'react-native-audio';
-import { RNCamera } from 'react-native-camera';
-const PendingView = () => (
-    <View
-        style={{
-            flex: 1,
-            backgroundColor: 'lightgreen',
-            justifyContent: 'center',
-            alignItems: 'center',
-        }}
-    >
-        <Text>Waiting</Text>
-    </View>
-);
+// import { AudioRecorder, AudioUtils } from 'react-native-audio';
+import Camera from 'react-native-camera'
 export class AudioExample extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cameraType: RNCamera.Constants.Type.back,
+            cameraType: Camera.constants.Type.back,
             pictureUri:'',
-            currentTime: 0.0,
-            recording: false,
-            paused: false,
-            stoppedRecording: false,
-            finished: false,
-            audioPath: AudioUtils.DocumentDirectoryPath + '/test.aac',
-            hasPermission: undefined,
+            // currentTime: 0.0,
+            // recording: false,
+            // paused: false,
+            // stoppedRecording: false,
+            // finished: false,
+            // audioPath: AudioUtils.DocumentDirectoryPath + '/test.aac',
+            // hasPermission: undefined,
         };
     }
-    prepareRecordingPath(audioPath) {
-        AudioRecorder.prepareRecordingAtPath(audioPath, {
-            SampleRate: 22050,
-            Channels: 1,
-            AudioQuality: "Low",
-            AudioEncoding: "aac",
-            AudioEncodingBitRate: 32000
-        });
-    }
+    // prepareRecordingPath(audioPath) {
+    //     AudioRecorder.prepareRecordingAtPath(audioPath, {
+    //         SampleRate: 22050,
+    //         Channels: 1,
+    //         AudioQuality: "Low",
+    //         AudioEncoding: "aac",
+    //         AudioEncodingBitRate: 32000
+    //     });
+    // }
 
-    componentDidMount() {
-        AudioRecorder.requestAuthorization().then((isAuthorised) => {
-            this.setState({ hasPermission: isAuthorised });
+    // componentDidMount() {
+    //     AudioRecorder.requestAuthorization().then((isAuthorised) => {
+    //         this.setState({ hasPermission: isAuthorised });
 
-            if (!isAuthorised) return;
+    //         if (!isAuthorised) return;
 
-            this.prepareRecordingPath(this.state.audioPath);
+    //         this.prepareRecordingPath(this.state.audioPath);
 
-            AudioRecorder.onProgress = (data) => {
-                this.setState({ currentTime: Math.floor(data.currentTime) });
-            };
+    //         AudioRecorder.onProgress = (data) => {
+    //             this.setState({ currentTime: Math.floor(data.currentTime) });
+    //         };
 
-            AudioRecorder.onFinished = (data) => {
-                // Android callback comes in the form of a promise instead.
-                if (Platform.OS === 'ios') {
-                    this._finishRecording(data.status === "OK", data.audioFileURL, data.audioFileSize);
-                }
-            };
-        });
-    }
+    //         AudioRecorder.onFinished = (data) => {
+    //             // Android callback comes in the form of a promise instead.
+    //             if (Platform.OS === 'ios') {
+    //                 this._finishRecording(data.status === "OK", data.audioFileURL, data.audioFileSize);
+    //             }
+    //         };
+    //     });
+    // }
 
-    _renderButton(title, onPress, active) {
-        var style = (active) ? styles.activeButtonText : styles.buttonText;
+    // _renderButton(title, onPress, active) {
+    //     var style = (active) ? styles.activeButtonText : styles.buttonText;
 
-        return (
-            <TouchableHighlight style={styles.button} onPress={onPress}>
-                <Text style={style}>
-                    {title}
-                </Text>
-            </TouchableHighlight>
-        );
-    }
+    //     return (
+    //         <TouchableHighlight style={styles.button} onPress={onPress}>
+    //             <Text style={style}>
+    //                 {title}
+    //             </Text>
+    //         </TouchableHighlight>
+    //     );
+    // }
 
-    _renderPauseButton(onPress, active) {
-        var style = (active) ? styles.activeButtonText : styles.buttonText;
-        var title = this.state.paused ? "RESUME" : "PAUSE";
-        return (
-            <TouchableHighlight style={styles.button} onPress={onPress}>
-                <Text style={style}>
-                    {title}
-                </Text>
-            </TouchableHighlight>
-        );
-    }
+    // _renderPauseButton(onPress, active) {
+    //     var style = (active) ? styles.activeButtonText : styles.buttonText;
+    //     var title = this.state.paused ? "RESUME" : "PAUSE";
+    //     return (
+    //         <TouchableHighlight style={styles.button} onPress={onPress}>
+    //             <Text style={style}>
+    //                 {title}
+    //             </Text>
+    //         </TouchableHighlight>
+    //     );
+    // }
 
-    async _pause() {
-        if (!this.state.recording) {
-            console.warn('Can\'t pause, not recording!');
-            return;
-        }
+    // async _pause() {
+    //     if (!this.state.recording) {
+    //         console.warn('Can\'t pause, not recording!');
+    //         return;
+    //     }
 
-        try {
-            const filePath = await AudioRecorder.pauseRecording();
-            this.setState({ paused: true });
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    //     try {
+    //         const filePath = await AudioRecorder.pauseRecording();
+    //         this.setState({ paused: true });
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
 
-    async _resume() {
-        if (!this.state.paused) {
-            console.warn('Can\'t resume, not paused!');
-            return;
-        }
+    // async _resume() {
+    //     if (!this.state.paused) {
+    //         console.warn('Can\'t resume, not paused!');
+    //         return;
+    //     }
 
-        try {
-            await AudioRecorder.resumeRecording();
-            this.setState({ paused: false });
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    //     try {
+    //         await AudioRecorder.resumeRecording();
+    //         this.setState({ paused: false });
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
 
-    async _stop() {
-        if (!this.state.recording) {
-            console.warn('Can\'t stop, not recording!');
-            return;
-        }
+    // async _stop() {
+    //     if (!this.state.recording) {
+    //         console.warn('Can\'t stop, not recording!');
+    //         return;
+    //     }
 
-        this.setState({ stoppedRecording: true, recording: false, paused: false });
+    //     this.setState({ stoppedRecording: true, recording: false, paused: false });
 
-        try {
-            const filePath = await AudioRecorder.stopRecording();
+    //     try {
+    //         const filePath = await AudioRecorder.stopRecording();
 
-            if (Platform.OS === 'android') {
-                this._finishRecording(true, filePath);
-            }
-            console.warn(filePath)
-            return filePath;
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    //         if (Platform.OS === 'android') {
+    //             this._finishRecording(true, filePath);
+    //         }
+    //         console.warn(filePath)
+    //         return filePath;
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
 
-    async _play() {
-        if (this.state.recording) {
-            await this._stop();
-        }
-        console.warn(this.state.audioPath)
-        this.setState({
-            pause: !this.state.pause
-        })
-    }
+    // async _play() {
+    //     if (this.state.recording) {
+    //         await this._stop();
+    //     }
+    //     console.warn(this.state.audioPath)
+    //     this.setState({
+    //         pause: !this.state.pause
+    //     })
+    // }
 
-    async _record() {
-        if (this.state.recording) {
-            console.warn('Already recording!');
-            return;
-        }
+    // async _record() {
+    //     if (this.state.recording) {
+    //         console.warn('Already recording!');
+    //         return;
+    //     }
 
-        if (!this.state.hasPermission) {
-            console.warn('Can\'t record, no permission granted!');
-            return;
-        }
+    //     if (!this.state.hasPermission) {
+    //         console.warn('Can\'t record, no permission granted!');
+    //         return;
+    //     }
 
-        if (this.state.stoppedRecording) {
-            this.prepareRecordingPath(this.state.audioPath);
-        }
+    //     if (this.state.stoppedRecording) {
+    //         this.prepareRecordingPath(this.state.audioPath);
+    //     }
 
-        this.setState({ recording: true, paused: false });
+    //     this.setState({ recording: true, paused: false });
 
-        try {
-            const filePath = await AudioRecorder.startRecording();
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    //     try {
+    //         const filePath = await AudioRecorder.startRecording();
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
 
-    _finishRecording(didSucceed, filePath, fileSize) {
-        this.setState({ finished: didSucceed });
-        console.log(`Finished recording of duration ${this.state.currentTime} seconds at path: ${filePath} and size of ${fileSize || 0} bytes`);
-    }
+    // _finishRecording(didSucceed, filePath, fileSize) {
+    //     this.setState({ finished: didSucceed });
+    //     console.log(`Finished recording of duration ${this.state.currentTime} seconds at path: ${filePath} and size of ${fileSize || 0} bytes`);
+    // }
 
     render() {
-
         return (
             <View style={styles.container}>
-                <RNCamera
-                    style={styles.preview}
-                    type={this.state.cameraType}
-                    // flashMode={RNCamera.Constants.FlashMode.on}
-                    permissionDialogTitle={'Permission to use camera'}
-                    permissionDialogMessage={'We need your permission to use your camera phone'}
-                >
-                    {({ camera, status }) => {
-                        if (status !== 'READY') return <PendingView />;
-                        return (
-                            <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-                                <TouchableOpacity onPress={() => this.takePicture(camera)} style={styles.capture}>
-                                    <Text style={{ fontSize: 14 }}> SNAP </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.switchCamera(camera)} style={styles.capture}>
-                                    <Text style={{ fontSize: 14 }}> switchCamera </Text>
-                                </TouchableOpacity>
-                            </View>
-                        );
+                <Camera
+                    ref={(cam) => {
+                        this.camera = cam;
                     }}
-                </RNCamera>
-                <Image source={{ uri: this.state.pictureUri }} style = {{width:200,height: 150}} />
+                    captureTarget={Camera.constants.CaptureTarget.disk}
+                    type={this.state.cameraType}
+                    style={styles.preview}
+                    aspect={Camera.constants.Aspect.fill}>
+                    <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+                </Camera>
+                <Image source={{ uri: this.state.pictureUri }} style={{ width: 200, height: 150 }} />
                 {/* <View style={styles.controls}>
                     {this._renderButton("RECORD", () => { this._record() }, this.state.recording)}
                     {this._renderButton("PLAY", () => { this._play() })}
@@ -225,28 +201,27 @@ export class AudioExample extends Component {
     //切换前后摄像头
     switchCamera() {
         var state = this.state;
-        if (state.cameraType == RNCamera.Constants.Type.back) {
-            state.cameraType = RNCamera.Constants.Type.front;
+        if (state.cameraType === Camera.constants.Type.back) {
+            state.cameraType = Camera.constants.Type.front;
         } else {
-            state.cameraType = RNCamera.Constants.Type.back;
+            state.cameraType = Camera.constants.Type.back;
         }
         this.setState(state);
     }
 
     //拍摄照片
     
-    takePicture = async function(camera) {
-        const options = { quality: 0.01, base64: true, doNotSave:false}
-        const data = await camera.takePictureAsync(options)
-        Dialog.show('', "拍照成功！图片保存地址：\n" + data.uri, [{ text: "确认", onPress: () => { } }])
-        this.setState({
-            pictureUri: data.uri
-        })
-        // this.camera.capture(options)
-        //     .then(function (data) {
-        //         Dialog.show('',"拍照成功！图片保存地址：\n" + data.uri, [{ text: "确认", onPress: () => { } }])
-        //     })
-        //     .catch(err => console.error(err));
+    takePicture() {
+        const options = { quality: 0.5, base64: true }
+        //options.location = ...
+        this.camera.capture({ options })
+            .then((data) => {
+                console.warn(data.path)
+                this.setState({
+                    pictureUri: data.path
+                })
+            })
+            .catch(err => console.error(err));
     }
 }
 
