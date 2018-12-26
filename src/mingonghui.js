@@ -7,7 +7,7 @@ import { getTitleStyle, getNavigationBarStyle } from './components/nav-scene'
 import { color, font } from './common/standard'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 import {
-  Login,
+  Login,ClassAdministration,LoginCode,
   Mine, MineNews, MineNewsDetail,
   HomeworkList,HomeworkDetail,AudioExample,
   ClassList,
@@ -110,6 +110,7 @@ export default class App extends React.Component {
             {/* 栈底页面，直接退出 */}
             <NavScene key="Bla" component={Bla} back={false} renderBackButton={false} onEnter={props => pop(props)} />
             {/* 登录相关 */}
+            <NavScene key="/login/login-code" component={LoginCode} title="LoginCode" />
             {/* <NavScene key="/project/detail" component={ProjectDetail} title="项目详情" /> */}
             {/* 作业相关 */}
             <NavScene key="/homework/list" component={HomeworkList} title="作业列表" />
@@ -117,6 +118,7 @@ export default class App extends React.Component {
             <NavScene key="/homework/recode" component={AudioExample} title ="录音"/>
             {/* 班级相关 */}
             {/* <NavScene key="/classes/list" component={ClassList} title="班级列表" /> */}
+             <NavScene key="/class/administration" component={ClassAdministration} title="班级管理" />
             {/* 我的 相关 */}
             {/* <NavScene key="/mine/account/detail" component={AccountDetail} title="账户详情" />
             <NavScene key="/mine/account/birthplace" component={AccountBirthplace} title="籍贯" />
