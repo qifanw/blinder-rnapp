@@ -7,7 +7,7 @@ import { getTitleStyle, getNavigationBarStyle } from './components/nav-scene'
 import { color, font } from './common/standard'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 import {
-  Login,ClassAdministration,LoginCode,
+  Login,ClassAdministration,LoginCode,Setting,
   Mine, MineNews, MineNewsDetail,
   HomeworkList,HomeworkDetail,AudioExample,
   ClassList,
@@ -110,7 +110,7 @@ export default class App extends React.Component {
             {/* 栈底页面，直接退出 */}
             <NavScene key="Bla" component={Bla} back={false} renderBackButton={false} onEnter={props => pop(props)} />
             {/* 登录相关 */}
-            <NavScene key="/login/login-code" component={LoginCode} title="LoginCode" />
+            <NavScene key="/login/login-code" component={LoginCode} title="验证码登录" />
             {/* <NavScene key="/project/detail" component={ProjectDetail} title="项目详情" /> */}
             {/* 作业相关 */}
             <NavScene key="/homework/list" component={HomeworkList} title="作业列表" />
@@ -120,7 +120,9 @@ export default class App extends React.Component {
             {/* <NavScene key="/classes/list" component={ClassList} title="班级列表" /> */}
              <NavScene key="/class/administration" component={ClassAdministration} title="班级管理" />
             {/* 我的 相关 */}
-            {/* <NavScene key="/mine/account/detail" component={AccountDetail} title="账户详情" />
+            <NavScene key="/mine/setting" component={Setting} title="设置" />
+
+            {/* <NavScene key="/mine/account/detail" component={Setting} title="设置" />
             <NavScene key="/mine/account/birthplace" component={AccountBirthplace} title="籍贯" />
             <NavScene key="/mine/account/authentication" component={AccountAuthentication} title="身份认证" />
             <NavScene key="/mine/role" component={Role} title="我的角色" />

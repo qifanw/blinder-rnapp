@@ -7,6 +7,7 @@ export const font = {
   f5: 15,
   f6: 16,
   f7: 14,
+  f8: 16,
   f9: 18,
   f25: 50
 };
