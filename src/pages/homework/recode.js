@@ -12,25 +12,8 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { RowFunc, Dialog, } from '../../components';
-<<<<<<< HEAD
 // import { AudioRecorder, AudioUtils } from 'react-native-audio';
 import Camera from 'react-native-camera'
-=======
-import { AudioRecorder, AudioUtils } from 'react-native-audio';
-// import { RNCamera } from 'react-native-camera';
-const PendingView = () => (
-    <View
-        style={{
-            flex: 1,
-            backgroundColor: 'lightgreen',
-            justifyContent: 'center',
-            alignItems: 'center',
-        }}
-    >
-        <Text>Waiting</Text>
-    </View>
-);
->>>>>>> f2a8d32715b16e51620afe9264ce8cf5b2eaf29b
 export class AudioExample extends Component {
     constructor(props) {
         super(props);
