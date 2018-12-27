@@ -1,2 +1,5 @@
-/Example
-issue_template.md
+/.github
+/examples
+circle.yml
+commitlint.config.js
+/android/build

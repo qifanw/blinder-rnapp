@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {
-    View, Text, StyleSheet,TouchableOpacity
+    View, Text, StyleSheet,TouchableOpacity,  Dimensions,
 } from 'react-native';
 import { jump, init, refresh } from '../../router'
 import { initRN } from '../../init';
+import Camera from 'react-native-camera';
 export class WorkTab extends Component {
     constructor(props) {
         super(props);
@@ -11,34 +12,44 @@ export class WorkTab extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-           <View style={styles.subContainer}>
-                        {/* <TouchableOpacity style={styles.myItem} activeOpacity={1} onPress={() => this._changeStatus(0)}>
-                            <Text style={tag == 1 ? styles.text1 : styles.text2}>项目详情</Text>
-                            <View style={tag == 0 ? styles.slide1 : styles.slide2} />
-                        </TouchableOpacity>
-                        <View style={{ width: 50 }} />
-                        <TouchableOpacity style={styles.myItem} activeOpacity={1} onPress={() => this._changeStatus(1)}>
-                            <Text style={tag == 0 ? styles.text1 : styles.text2}>上链信息</Text>
-                            <View style={tag == 1 ? styles.slide1 : styles.slide2} />
-                        </TouchableOpacity> */}
-                    </View>
-            </View>
+          <View style={styles.container}>
+        <Camera
+          ref={(cam) => {
+            this.camera = cam;
+          }}
+          style={styles.preview}
+          aspect={Camera.constants.Aspect.fill}>
+          <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+        </Camera>
+      </View>
         )
     }
-}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-      
-    },
-    subContainer:{
-        backgroundColor: "#000000",
-        height: 50,
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "flex-end",
-        
+    takePicture() {
+      const options = {};
+      //options.location = ...
+      this.camera.capture({metadata: options})
+        .then((data) => console.log(data))
+        .catch(err => console.error(err));
     }
-});
+    }
+
+
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        flexDirection: 'row',
+      },
+      preview: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center'
+      },
+      capture: {
+        flex: 0,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        color: '#000',
+        padding: 10,
+        margin: 40
+      }
+    });

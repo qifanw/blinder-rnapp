@@ -53,10 +53,11 @@ export default class App extends React.Component {
     };
     return (
       <Router>
-        <Scene key="root" hideNavBar={true} transitionConfig={() => ({ screenInterpolator: CardStackStyleInterpolator.forHorizontal })}>
+         <Scene key="root" renderBackButton={false} >
+        {/* <Scene key="root" hideNavBar={true} transitionConfig={() => ({ screenInterpolator: CardStackStyleInterpolator.forHorizontal })}> */}
           <NavScene key="Bla" component={Bla} back={false} renderBackButton={false} />
           
-          <NavScene key="home" component={Login} title="登录" hideNavBar={true} />
+          <NavScene key="home" component={Login} title="登录" renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled = {false} />
           <Tabs
             key={this.state.userInfo?'home':'tab'}
             lazy={true}
