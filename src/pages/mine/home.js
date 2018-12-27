@@ -87,7 +87,7 @@ export class Home extends Component {
   componentWillReceiveProps(nextProps) {
   //   this.getNewInfo()
     
-    this.getData('noCheckRole')
+    // this.getData('noCheckRole')
     
   //   console.log('----------+++---------------111')
    }
