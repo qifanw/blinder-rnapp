@@ -152,7 +152,7 @@ export class Home extends Component {
           </View>
           <View style={styles.subcontainer}>
             <RowFunc source={require('./images/ic_ye.png')} text="设置" onPress={() => jump('/mine/setting')} />
-            <RowFunc source={require('./images/ic_wdyhk.png')} text="我的银行卡" onPress={() => jumpApp('/user/bank-list')} />
+            <RowFunc source={require('./images/ic_wdyhk.png')} text="作业详情" onPress={() => jump('/homework/WorkTab')} />
             <RowFunc source={require('./images/ic_wdgzk.png')} text="我的工资卡" onPress={() => jump('/mine/salarycard')} />
             <RowFunc source={require('./images/ic_wdzd.png')} text="我的账单" onPress={() => jumpApp('/assets/order-record-list')} hasBottomBorder={false} />
           </View>
