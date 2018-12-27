@@ -12,7 +12,7 @@
     "resolveRCTValueAnimatedNode": "sed -i '' 's/#import <RCTAnimation\\/RCTValueAnimatedNode.h>/#import \"RCTValueAnimatedNode.h\"/' ./node_modules/react-native/Libraries/NativeAnimation/RCTNativeAnimatedNodesManager.h",
     "resolvefishhook": "sed -i '' 's#<fishhook/fishhook.h>#\"fishhook.h\"#g' ./node_modules/react-native/Libraries/WebSocket/RCTReconnectingWebSocket.m",
     "resolve": "npm run resolveRCTValueAnimatedNode;npm run resolvefishhook;",
-    "postinstall": "npm --registry https://registry.npm.taobao.org install react-native@0.53.3 rn-nodeify react-native-device-info react-native-fast-image react-native-image-picker react-native-star-rating react-native-camera react-native-audio react-native-video",
+    "postinstall": "npm --registry https://registry.npm.taobao.org install react-native@0.53.3 rn-nodeify react-native-device-info react-native-fast-image react-native-image-picker react-native-star-rating react-native-camera@0.7.0 react-native-audio react-native-video",
     "reinstall": "git checkout package.json;rm package-lock.json;rm shim.js;rm -rf node_modules;npm install",
     "history": "git log --pretty=format:'%h - %an, %ar : %s' history.json"
   },
