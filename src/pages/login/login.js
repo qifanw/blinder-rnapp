@@ -47,7 +47,7 @@ export class Login extends Component {
         else {
 
             // jump('/login/login-code', { phone: this.state.phone })
-            jump('/login/StudentInformation')
+            jump('/login/PatriarchOneInformation')
         }
 
     }
