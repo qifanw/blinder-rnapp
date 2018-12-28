@@ -11,6 +11,7 @@ export class LoginCode extends Component {
         super(props);
         this.state = {
             loginCode: "",//验证码
+            codeText:null
             
         }
         this.onChangeVerifyCode = this.onChangeVerifyCode.bind(this);
@@ -18,14 +19,21 @@ export class LoginCode extends Component {
     onChangeVerifyCode(text) {
         console.log("登陸--value-" + text)
     }
+    componentDidMount() {
+      let  phone  =  this.props.phone;
+      console.log("登陸--value-" + phone)
+      this.setState({
+        codeText:"验证码已发送至"+phone
 
+      })
+    }
   
 
     render() {
         
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>验证码已发送至1234567890</Text>
+                <Text style={styles.text}>{this.state.codeText}</Text>
                 {/* 验证码输入框 */}
                 <View style={styles.inputView}>
 
@@ -36,6 +44,10 @@ export class LoginCode extends Component {
                     />
 
                 </View>
+                <View  style={styles.textCodeV}>
+                <Text  style={styles.textCode}>重新发送验证码</Text>
+                </View>
+               
             </View>
         )
     }
@@ -53,10 +65,22 @@ const styles = StyleSheet.create({
         marginTop: 62,
     },
     inputView: {
-        flex: 1,
+        // flex: 1,
         marginTop: 28,
         // marginLeft: 74,
         // marginRight: 74,
     },
-  
+    textCode:{
+       
+        color: "#2F2F2F",
+        fontSize: 14,
+        // marginLeft: 20,
+        marginTop: 46,
+    },
+    textCodeV:{
+        flex: 1,
+       // justifyContent: 'center',
+        alignItems:'center', // 交叉轴中点对齐
+    }
+
 });
