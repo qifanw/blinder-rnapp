@@ -77,26 +77,26 @@ export default class App extends React.Component {
             inactiveBackgroundColor={color.c1}
           >
             {/* 首页 */}
-            <Stack key="tab_first" navBar={() => null} title="作业列表" icon={TabIcon} image={require('./images/ic_sy.png')} activeImage={require('./images/ic_sjax.png')}>
+            <Stack key="tab_first" title="作业列表" icon={TabIcon} image={require('./images/ic_sy.png')} activeImage={require('./images/ic_sjax.png')}>
               <NavScene
                 key="/home"
                 component={HomeworkList}
-                hideNavBar={true}
                 back={false}
                 renderBackButton={false}
-                titleStyle={[getTitleStyle(), { width: Dimensions.get('window').width - 30 }]}
+                titleStyle={[getTitleStyle(), { color: color.c1 }]}
+                navigationBarStyle={[getNavigationBarStyle(), { backgroundColor: '#6F6F6F' }]}
                 onEnter={() => { Actions.refresh({ __refreshType: `tabRefresh`, timestamp: new Date().getTime() }) }}
               />
             </Stack>
             {/* 班级列表 */}
-            <Stack key="tab_second" navBar={() => null} title="班级列表" icon={customTabIcon} image={require('./pages/homework/images/胶片盘.png')} activeImage={require('./images/ic_sjax.png')}>
+            <Stack key="tab_second" title="班级列表" icon={customTabIcon} image={require('./pages/homework/images/胶片盘.png')} activeImage={require('./images/ic_sjax.png')}>
               <NavScene
                 key="/classlist"
                 component={ClassList}
-                hideNavBar={true}
                 back={false}
                 renderBackButton={false}
-                titleStyle={[getTitleStyle(), { width: Dimensions.get('window').width - 30 }]}
+                titleStyle={[getTitleStyle(), { color: color.c1 }]}
+                navigationBarStyle={[getNavigationBarStyle(), { backgroundColor: '#6F6F6F' }]}
                 onEnter={() => { Actions.refresh({ __refreshType: `tabRefresh`, timestamp: new Date().getTime() }) }}
               />
             </Stack>
@@ -108,7 +108,7 @@ export default class App extends React.Component {
                 back={false}
                 renderBackButton={false}
                 titleStyle={[getTitleStyle(), { color: color.c1 }]}
-                navigationBarStyle={[getNavigationBarStyle(), { backgroundColor: color.c6 }]}
+                navigationBarStyle={[getNavigationBarStyle(), { backgroundColor: '#6F6F6F' }]}
                 renderLeftButton={() => <LeftButton onPress={() => jump('/mine/organ/list')} text='机构管理' textStyle={{ color: color.c1, fontSize: font.f3 }} />}
                 renderRightButton={props => <RightImage onPress={() => jump('/mine/news')} {...props} />}
                 onEnter={() => { Actions.refresh({ __refreshType: `tabRefresh`, timestamp: new Date().getTime() }) }}
