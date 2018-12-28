@@ -53,7 +53,7 @@ class ListItem extends Component {
                         <Text style={styles.textStyle}>初二一班</Text>
                         <Text style={[styles.textStyle, { fontSize: 12, marginTop: 5 }]}>教师30人 学生60人</Text>
                     </View>
-                    {id == 1 ? <TouchableOpacity style={{ width: 71, height: 34, borderRadius: 8, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', shadowColor:'#000000',shadowOffset:{width:0,height:3},shadowOpacity:0.16}}>
+                    {id == 1 ? <TouchableOpacity style={{ width: 71, height: 34, borderRadius: 8, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', shadowColor:'#000000',shadowOffset:{width:0,height:3},shadowOpacity:0.16,elevation:4}}>
                         <Text style={{ fontSize: 18, color:'#6F6F6F'}}>加入</Text>
                     </TouchableOpacity>:<Image source={require('../../components/images/ic_ejjt.png')} style={{ marginLeft: 65 }} />}
                 </View>
