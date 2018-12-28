@@ -7,7 +7,7 @@ import { getTitleStyle, getNavigationBarStyle } from './components/nav-scene'
 import { color, font } from './common/standard'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 import {
-  Login, ClassAdministration, LoginCode, Setting, WorkTab,TeacherInformation,
+  Login, ClassAdministration, LoginCode, Setting, WorkTab,TeacherInformation,StudentInformation,
   Mine, MineNews, MineNewsDetail,
   HomeworkList, HomeworkDetail, AudioExample,
   ClassList,
@@ -80,8 +80,8 @@ export default class App extends React.Component {
           <NavScene key="home" component={Login}  renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled={false} />
          
           <Tabs
-            key={this.state.userInfo?'home':'tab'}
-            // key={this.state.userPackage == 1 ? 'home':'tab'}
+            // key={this.state.userInfo?'home':'tab'}
+            key={this.state.userPackage == 1 ? 'home':'tab'}
             lazy={true}
             // swipeEnabled
             showLabel={false}
@@ -135,7 +135,10 @@ export default class App extends React.Component {
             <NavScene key="Bla" component={Bla} back={false} renderBackButton={false} onEnter={props => pop(props)} />
             {/* 登录相关 */}
             <NavScene key="/login/login-code" component={LoginCode} title="验证码登录" />
+            {/* 老师  完善个人信息 */}
             <NavScene key="/login/TeacherInformation" component={TeacherInformation} renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled={false} />
+          {/* 学生  完善个人信息 */}
+          <NavScene key="/login/StudentInformation" component={StudentInformation} renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled={false} />
             {/* 作业相关  WorkTab*/}
             <NavScene key="/homework/list" component={HomeworkList} title="作业列表" />
             <NavScene key="/homework/detail" component={HomeworkDetail} title="作业详情" />
