@@ -7,27 +7,38 @@ import { getTitleStyle, getNavigationBarStyle } from './components/nav-scene'
 import { color, font } from './common/standard'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 import {
-  Login,ClassAdministration,LoginCode,Setting,WorkTab,
+  Login, ClassAdministration, LoginCode, Setting, WorkTab,
   Mine, MineNews, MineNewsDetail,
-  HomeworkList,HomeworkDetail,AudioExample,
+  HomeworkList, HomeworkDetail, AudioExample,
   ClassList,
 } from './pages'
 import { jump, pop, close, back, popTo, replace, reset } from './router';
 import { getUserInfo } from './communication';
+import {setItem,getItem} from './common/local-store';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
-      userInfo:{}
+    this.state = {
+      userInfo: {},
+      userPackage:2
     }
     // RN初始化
     initRN(this.props).then(result => {
-      console.log('==============',result)
+      console.log('==============', result)
       this.subscription = result;
+     
     });
+    //  // // 取出用户信息
+    //  getItem("userPackage").then(result => {
+    //   console.log("=====userPackage===getItem======", result)
+    //  this.setState({
+    //   userPackage:result?result:9
+    //  })
+    //  return result;
+    // });
   }
   componentDidMount() {
-    getUserInfo().then(result =>{
+    getUserInfo().then(result => {
       this.setState(
         userInfo = result
       )
@@ -37,6 +48,7 @@ export default class App extends React.Component {
     this.subscription();
   }
   render() {
+    console.log('========userPackage===render=', this.state.userPackage)
     const TabIcon = (props) => {
       return <View style={styles.tabView}>
         <Image source={props.focused ? props.activeImage : props.image} />
@@ -46,7 +58,7 @@ export default class App extends React.Component {
     };
     const customTabIcon = (props) => {
       return <View style={styles.coustomTabView}>
-        <Image source={props.focused ? props.activeImage : props.image} resizeModel= 'contain' style={{width:80,height:80,marginTop: 0,}} />
+        <Image source={props.focused ? props.activeImage : props.image} resizeModel='contain' style={{ width: 80, height: 80, marginTop: 0, }} />
         <View style={{ height: 4 }}></View>
         <Text style={{ color: props.focused ? color.c6 : '#999', fontSize: font.f1 }}>{props.title}</Text>
       </View>
@@ -64,10 +76,12 @@ export default class App extends React.Component {
               backAndroidHandler={()=>onBackPress()}
                transitionConfig={() => ({ screenInterpolator: CardStackStyleInterpolator.forHorizontal })}>
           <NavScene key="Bla" component={Bla} back={false} renderBackButton={false} />
-          
-          <NavScene key="home" component={Login} title="登录" renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled = {false} />
+
+          <NavScene key="home" component={Login}  renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled={false} />
+         
           <Tabs
-            key={this.state.userInfo?'home':'tab'}
+            // key={this.state.userInfo?'home':'tab'}
+            key={this.state.userPackage == 1 ? 'home':'tab'}
             lazy={true}
             // swipeEnabled
             showLabel={false}
@@ -79,6 +93,7 @@ export default class App extends React.Component {
             {/* 首页 */}
             <Stack key="tab_first" title="作业列表" icon={TabIcon} image={require('./images/ic_sy.png')} activeImage={require('./images/ic_sjax.png')}>
               <NavScene
+                // key="/work"
                 key="/home"
                 component={HomeworkList}
                 back={false}
@@ -114,7 +129,7 @@ export default class App extends React.Component {
                 onEnter={() => { Actions.refresh({ __refreshType: `tabRefresh`, timestamp: new Date().getTime() }) }}
               />
             </Stack>
-          </Tabs> 
+          </Tabs>
           <Stack key="scene_stack" transitionConfig={() => ({ screenInterpolator: CardStackStyleInterpolator.forHorizontal })}>
             {/* 栈底页面，直接退出 */}
             <NavScene key="Bla" component={Bla} back={false} renderBackButton={false} onEnter={props => pop(props)} />
@@ -125,10 +140,10 @@ export default class App extends React.Component {
             <NavScene key="/homework/list" component={HomeworkList} title="作业列表" />
             <NavScene key="/homework/detail" component={HomeworkDetail} title="作业详情" />
             <NavScene key="/homework/WorkTab" component={WorkTab} title="作业详情" />
-            <NavScene key="/homework/recode" component={AudioExample} title ="录音"/> 
+            <NavScene key="/homework/recode" component={AudioExample} title="录音" />
             {/* 班级相关 */}
             {/* <NavScene key="/classes/list" component={ClassList} title="班级列表" /> */}
-             <NavScene key="/class/administration" component={ClassAdministration} title="班级管理" />
+            <NavScene key="/class/administration" component={ClassAdministration} title="班级管理" />
             {/* 我的 相关 */}
             <NavScene key="/mine/setting" component={Setting} title="设置" />
 
@@ -174,14 +189,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
-  coustomTabView:{
-    alignItems:'center',
+  coustomTabView: {
+    alignItems: 'center',
     backgroundColor: 'white',
     position: 'absolute',
     bottom: 0,
     width: 100,
-    height:100,
-    borderRadius:50
+    height: 100,
+    borderRadius: 50
   },
   text: {
     color: color["c2"],
