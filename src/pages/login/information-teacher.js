@@ -40,7 +40,7 @@ export class TeacherInformation extends Component {
         });
 
     }
-    savePress() {
+    onClink() {
         let listData = [...this.state.listData];
         let arr = [];
         for (let index = 0; index < listData.length; index++) {
@@ -78,17 +78,6 @@ export class TeacherInformation extends Component {
                         text="加入班级" textStyle={{ color: "#FFFFFF", fontSize: 20, }}
                         onPress={() => this.onClink()} />
                 </View>
-            </View>
-        )
-    }
-    //列表的尾部
-    ListFooterComponent() {
-        return (
-            <View style={styles.itemBtnGroupView} >
-                <RowButton normalStyle={{ backgroundColor: "#707070", borderRadius: 30, }}
-                    underlayColor={color.c70}
-                    text="加入班级" textStyle={{ color: "#FFFFFF", fontSize: 20, }}
-                    onPress={() => this.onClink()} />
             </View>
         )
     }
