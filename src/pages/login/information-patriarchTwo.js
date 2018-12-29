@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    View, Text, StyleSheet, TouchableOpacity, Dimensions,FlatList,Image
+    View, Text, StyleSheet, TouchableOpacity, Dimensions, FlatList, Image
 } from 'react-native';
 import { jump, init, refresh } from '../../router'
 import { initRN } from '../../init';
@@ -12,20 +12,35 @@ export class PatriarchTwoInformation extends Component {
         super(props);
         this.state = {
             listData: [
-                { id: 0, text: '爸爸', image:require('./images/ic_tx_xq.png'), isClick: false },
-                { id: 1, text: '妈妈',image:require('./images/ic_tx_xq.png'), isClick: false },
-                { id: 2, text: '姥姥（外婆）',image:require('./images/ic_tx_xq.png'), isClick: false },
-                { id: 3, text: '姥爷（外公）',image:require('./images/ic_tx_xq.png'), isClick: false },
-                { id: 4, text: '爷爷',image:require('./images/ic_tx_xq.png'), isClick: false },
-                { id: 5, text: '奶奶', image:require('./images/ic_tx_xq.png'),isClick: false },
-                { id: 6, text: '其他监护人',image:require('./images/ic_tx_xq.png'), isClick: false },
+                { id: 0, text: '爸爸', image: require('./images/ic_tx_xq.png'), isClick: false },
+                { id: 1, text: '妈妈', image: require('./images/ic_tx_xq.png'), isClick: false },
+                { id: 2, text: '姥姥（外婆）', image: require('./images/ic_tx_xq.png'), isClick: false },
+                { id: 3, text: '姥爷（外公）', image: require('./images/ic_tx_xq.png'), isClick: false },
+                { id: 4, text: '爷爷', image: require('./images/ic_tx_xq.png'), isClick: false },
+                { id: 5, text: '奶奶', image: require('./images/ic_tx_xq.png'), isClick: false },
+                { id: 6, text: '其他监护人', image: require('./images/ic_tx_xq.png'), isClick: false },
             ],
         };
     }
     clickF(id) {
-
+        let listData = [...this.state.listData];
+        console.log(listData)
+        for (let i of listData) {
+            if (i.id == id) {
+                if (listData[i.id].isClick) {
+                    listData[i.id].isClick = false
+                } else {
+                    listData[i.id].isClick = true
+                }
+            } else {
+                listData[i.id].isClick = false
+            }
+        }
+        this.setState({
+            listData: listData,
+        });
     }
-    onClink(){
+    onClink() {
 
     }
     render() {
@@ -70,13 +85,13 @@ class ItemView extends Component {
         this.props.click(this.props.id);
     }
     render() {
-        const { index, length, text, isClick, id ,image} = this.props;
+        const { index, length, text, isClick, id, image } = this.props;
         return (
             <TouchableOpacity style={styles.itemContainer}
                 activeOpacity={1}
                 onPress={() => this.itemClick()} >
                 <View style={[styles.itemTextV, index + 1 >= length ? {} : { marginRight: 30 }]} >
-                <Image style={styles.imgStyle} source={image}  ></Image>
+                    <Image style={styles.imgStyle} source={image}  ></Image>
                     <Text style={[styles.itemText]}>{text}</Text>
                 </View>
             </TouchableOpacity>
@@ -100,7 +115,7 @@ const styles = StyleSheet.create({
     capture: {
         flexDirection: 'row',
     },
-    itemContainer:{
+    itemContainer: {
         marginTop: 12,
     },
     text1: {
@@ -117,19 +132,19 @@ const styles = StyleSheet.create({
         color: "#9B9B9B",
         marginTop: 12,
     },
-    itemTextV:{
+    itemTextV: {
         alignItems: 'center'
     },
-    itemText :{
+    itemText: {
         fontSize: 16,
-        color: "#515151",  
+        color: "#515151",
     },
-    FlatListView:{
+    FlatListView: {
         marginTop: 40,
         alignItems: 'center',
         marginLeft: 38,
     },
-    itemBtnGroupView:{
+    itemBtnGroupView: {
         marginTop: 26,
         marginRight: 40,
         marginLeft: 40,

@@ -29,14 +29,14 @@ export class NavScene extends Scene{
 export function getNavigationBarStyle() {
   if(Platform.OS == "ios") {
     return {
-      backgroundColor: color["c1"],
+      backgroundColor:  "#6F6F6F",
       borderBottomWidth: 0,
     };
   } 
 
   if(Platform.OS == "android") {
     return {
-      backgroundColor: color["c1"],
+      backgroundColor: "#6F6F6F",
       borderBottomWidth: 0,
       elevation: 0,
       height: 44

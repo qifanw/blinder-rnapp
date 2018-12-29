@@ -149,7 +149,7 @@ export default class App extends React.Component {
             {/* 作业相关  WorkTab*/}
             <NavScene key="/homework/list" component={HomeworkList} title="作业列表" />
             <NavScene key="/homework/detail" component={HomeworkDetail} title="作业详情" />
-            <NavScene key="/homework/WorkTab" component={WorkTab} title="作业详情" />
+            <NavScene key="/homework/WorkTab"  component={WorkTab} title="作业详情" />
             <NavScene key="/homework/recode" component={AudioExample} title="录音" />
             {/* 班级相关 */}
             {/* <NavScene key="/classes/list" component={ClassList} title="班级列表" /> */}
