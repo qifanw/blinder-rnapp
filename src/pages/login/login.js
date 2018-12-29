@@ -7,6 +7,9 @@ import { initRN } from '../../init';
 import { getItem, setItem } from '../../common/local-store';
 import { RowFunc, Dialog, Toast, Loading, RowInput, RowButton } from '../../components';
 import { color, font, gap } from '../../common/standard'
+
+import LocalStorage from '../../common/localstorage'
+const instance = LocalStorage.getInstance();
 export class Login extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +19,7 @@ export class Login extends Component {
         }
     }
     componentDidMount() {
-
+        instance.setItem("123","都是圣诞节")
     }
     handleClear() {
         this.handleInputChange("")
@@ -45,15 +48,17 @@ export class Login extends Component {
             return;
         }
         else {
-
+            instance.setItem("userPackage","hooo")
+         //   setItem("userPackage", 1)
+           jump("tab")
             // jump('/login/login-code', { phone: this.state.phone })
-            jump('/login/PatriarchOneInformation')
+            // jump('/login/PatriarchOneInformation')
         }
 
     }
     ontouchcancel() {
 
-        setItem("userPackage", 1)
+        setItem("userPackage", 12)
         jump("tab")
     }
     ontouchc() {

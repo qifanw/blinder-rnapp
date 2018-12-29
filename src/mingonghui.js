@@ -7,36 +7,38 @@ import { getTitleStyle, getNavigationBarStyle } from './components/nav-scene'
 import { color, font } from './common/standard'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 import {
-  Login, ClassAdministration, LoginCode, Setting, WorkTab,TeacherInformation,StudentInformation,PatriarchOneInformation,
-  Mine, MineNews, MineNewsDetail,PatriarchTwoInformation,
+  Login, ClassAdministration, LoginCode, Setting, WorkTab, TeacherInformation, StudentInformation, PatriarchOneInformation,
+  Mine, MineNews, MineNewsDetail, PatriarchTwoInformation,
   HomeworkList, HomeworkDetail, AudioExample,
   ClassList,
 } from './pages'
 import { jump, pop, close, back, popTo, replace, reset } from './router';
 import { getUserInfo } from './communication';
-import {setItem,getItem} from './common/local-store';
+import { setItem, getItem } from './common/local-store';
+import LocalStorage from './common/localstorage';
+const instance = LocalStorage.getInstance();
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userInfo: {},
-      userPackage:2
+      userPackage:{}
     }
+
     // RN初始化
     initRN(this.props).then(result => {
       console.log('==============', result)
       this.subscription = result;
-     
     });
-    //  // // 取出用户信息
-    //  getItem("userPackage").then(result => {
-    //   console.log("=====userPackage===getItem======", result)
-    //  this.setState({
-    //   userPackage:result?result:9
-    //  })
-    //  return result;
-    // });
+      // // 取出用户信息
+    instance.getItem("userPackage").then(result =>{
+      console.log("=====userPackage===getItem====result==", result)
+      this.setState({
+        userPackage: result,
+      })
+    })
   }
+ 
   componentDidMount() {
     getUserInfo().then(result => {
       this.setState(
@@ -63,7 +65,7 @@ export default class App extends React.Component {
         <Text style={{ color: props.focused ? color.c6 : '#999', fontSize: font.f1 }}>{props.title}</Text>
       </View>
     };
-    const onBackPress = ()=>{
+    const onBackPress = () => {
       if (Actions.state.index !== 0) {
         return false
       }
@@ -72,16 +74,16 @@ export default class App extends React.Component {
     }
     return (
       <Router>
-        <Scene key="root" hideNavBar={true} panHandlers={null} 
-              backAndroidHandler={()=>onBackPress()}
-               transitionConfig={() => ({ screenInterpolator: CardStackStyleInterpolator.forHorizontal })}>
+        <Scene key="root" hideNavBar={true} panHandlers={null}
+          backAndroidHandler={() => onBackPress()}
+          transitionConfig={() => ({ screenInterpolator: CardStackStyleInterpolator.forHorizontal })}>
           <NavScene key="Bla" component={Bla} back={false} renderBackButton={false} />
 
-          <NavScene key="home" component={Login}  renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled={false} />
-         
+          <NavScene key="home" component={Login} renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled={false} />
+
           <Tabs
             // key={this.state.userInfo?'home':'tab'}
-            key={this.state.userPackage == 1 ? 'home':'tab'}
+            key={this.state.userPackage? 'home' : 'tab'}
             lazy={true}
             // swipeEnabled
             showLabel={false}
@@ -137,13 +139,13 @@ export default class App extends React.Component {
             <NavScene key="/login/login-code" component={LoginCode} title="验证码登录" />
             {/* 老师  完善个人信息 */}
             <NavScene key="/login/TeacherInformation" component={TeacherInformation} renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled={false} />
-          {/* 学生  完善个人信息 */}
-          <NavScene key="/login/StudentInformation" component={StudentInformation} renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled={false} />
-          {/* 家长  完善个人信息  */}
-          <NavScene key="/login/PatriarchOneInformation" component={PatriarchOneInformation} renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled={false} />
-          <NavScene key="/login/PatriarchTwoInformation" component={PatriarchTwoInformation} />
+            {/* 学生  完善个人信息 */}
+            <NavScene key="/login/StudentInformation" component={StudentInformation} renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled={false} />
+            {/* 家长  完善个人信息  */}
+            <NavScene key="/login/PatriarchOneInformation" component={PatriarchOneInformation} renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled={false} />
+            <NavScene key="/login/PatriarchTwoInformation" component={PatriarchTwoInformation} />
 
-          
+
             {/* 作业相关  WorkTab*/}
             <NavScene key="/homework/list" component={HomeworkList} title="作业列表" />
             <NavScene key="/homework/detail" component={HomeworkDetail} title="作业详情" />
