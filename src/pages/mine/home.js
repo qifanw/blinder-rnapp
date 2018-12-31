@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {
-  View, Text, StyleSheet, ScrollView, FlatList, Image, TouchableWithoutFeedback, Alert, Dimensions, RefreshControl
+  View, Text, StyleSheet, ScrollView, Clipboard, Image, TouchableWithoutFeedback, Alert, Dimensions, RefreshControl
 } from 'react-native';
 import { gap, color, font } from '../../common/standard';
-import { RowFunc, Dialog, Toast, Loading } from '../../components';
+import { RowFunc, Dialog, Toast, Loading, DialogInvite } from '../../components';
 import { jump, jumpApp, jumpRNApp, refresh } from '../../router';
 import { service, logger } from '../../services';
 import { getUserInfo, ENV } from '../../communication'
@@ -28,7 +28,23 @@ export class Home extends Component {
   }
 
   _noFinishing() {
-    Dialog.show('', '功能开发中...', [{ text: "确认", onPress: () => { } }]);
+    DialogInvite.show("邀请学生", "snasjc", (() => this._bindingCardon()), (() => this.onCopy()))
+  }
+  _bindingCardon() {
+    Toast.show("减肥的减肥---阿监察局-")
+
+  }
+  // 复制
+  async  onCopy() {
+    Clipboard.setString("snasjc");
+    try {
+        var content = await Clipboard.getString();
+        this.setState({ content });
+        Toast.show("已复制")
+
+    } catch (e) {
+        this.setState({ content: e.message });
+    }
   }
   getData(checkRole) {
     getUserInfo().then(result => {
@@ -49,12 +65,12 @@ export class Home extends Component {
           // Toast.show("服务器异常，请稍后重试");
         }
         if (workerInfo.message.code == 0) {
-          if(checkRole == 'checkRole'){
+          if (checkRole == 'checkRole') {
             if (!workerInfo.data.role) {
               jump('/mine/role', { _back: false })
             }
           }
-          
+
           this.setState({
             refreshing: true,
             roleInfo: workerInfo ? workerInfo.data : {},
@@ -85,12 +101,12 @@ export class Home extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-  //   this.getNewInfo()
-    
+    //   this.getNewInfo()
+
     // this.getData('noCheckRole')
-    
-  //   console.log('----------+++---------------111')
-   }
+
+    //   console.log('----------+++---------------111')
+  }
   componentDidMount() {
     // this.getData('checkRole')
     // this.getNewInfo()
@@ -142,7 +158,7 @@ export class Home extends Component {
           <View style={styles.subcontainer}>
             <RowFunc source={require('./images/ic_wdjs.png')} text="班級管理" onPress={() => jump('/class/administration')} />
             {/* jump('/mine/account/authentication') 身份认证待开发 */}
-            {/* <RowFunc source={require('./images/ic_sfrz.png')} text="身份认证" onPress = {() =>  this._noFinishing()} desc=" 已认证" descStyle={styles.descstyle}/>  */}
+            <RowFunc source={require('./images/ic_sfrz.png')} text="弹窗" onPress={() => this._noFinishing()} />
             {roleInfo.role == 1 ? <RowFunc source={require('./images/ic_wdgz.png')} text="我的工种" onPress={() => jump('/mine/skill')} desc={workerKindArr.join(' ') ? '已选' : "未选"} descStyle={styles.descstyle} /> : null}
             {roleInfo.role == 1 ? <RowFunc source={require('./images/ic_wdzs.png')} text="我的证书" onPress={() => jump('/mine/certificate/list', { hasHeader: false, userId: userInfo.userId })} /> : null}
             {roleInfo.role == 1 ? <RowFunc source={require('./images/ic_wdxs.png')} text="我的协商" onPress={() => jump('/negotiate/list', { userId: userInfo.userId, roleId: 4 })} /> : null}

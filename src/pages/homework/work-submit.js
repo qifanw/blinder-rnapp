@@ -60,7 +60,7 @@ class ListItem extends Component {
                     <View style={[styles.bgViewStyle]}>
                         <View style={{ flexDirection: 'row' }}>
                             <Text style={[styles.textStyle, {flex: 1,}]}>{name}</Text>
-                            <Text style={[styles.textStyle, {flex: 1,}]}>89%</Text>
+                            <Text style={[styles.textStyle, {flex: 1,}]}>100%</Text>
                         </View>
                         <Text style={[styles.textStyle, { fontSize: 12, marginTop: 5 }]}>时间：2018-12-28 11:00</Text>
                     </View>
