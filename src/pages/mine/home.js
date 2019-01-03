@@ -3,7 +3,7 @@ import {
   View, Text, StyleSheet, ScrollView, Clipboard, Image, TouchableWithoutFeedback, Alert, Dimensions, RefreshControl
 } from 'react-native';
 import { gap, color, font } from '../../common/standard';
-import { RowFunc, Dialog, Toast, Loading, DialogInvite } from '../../components';
+import { RowFunc, Dialog, Toast, Loading, DialogStudent, EditView,DialogTeacher } from '../../components';
 import { jump, jumpApp, jumpRNApp, refresh } from '../../router';
 import { service, logger } from '../../services';
 import { getUserInfo, ENV } from '../../communication'
@@ -22,13 +22,19 @@ export class Home extends Component {
       roleInfo: {},
       workerKindArr: [],
       balance: "",
-      isRefreshing: false
+      isRefreshing: false,
+      EditViewname:""
 
     }
   }
-
+  _noteacher(){
+    DialogTeacher.show("邀请老师", "snasjc", (() => this.oteacher(t)), (() => this.onCopy()))
+  }
+  oteacher(t){
+    Toast.show("减肥的减肥---阿监察局-"+t)
+  }
   _noFinishing() {
-    DialogInvite.show("邀请学生", "snasjc", (() => this._bindingCardon()), (() => this.onCopy()))
+    DialogStudent.show("邀请学生", "snasjc", (() => this._bindingCardon()), (() => this.onCopy()))
   }
   _bindingCardon() {
     Toast.show("减肥的减肥---阿监察局-")
@@ -38,12 +44,12 @@ export class Home extends Component {
   async  onCopy() {
     Clipboard.setString("snasjc");
     try {
-        var content = await Clipboard.getString();
-        this.setState({ content });
-        Toast.show("已复制")
+      var content = await Clipboard.getString();
+      this.setState({ content });
+      Toast.show("已复制")
 
     } catch (e) {
-        this.setState({ content: e.message });
+      this.setState({ content: e.message });
     }
   }
   getData(checkRole) {
@@ -144,6 +150,7 @@ export class Home extends Component {
     }
     return (
       <View>
+
         <ScrollView
           refreshControl={
             <RefreshControl
@@ -153,12 +160,19 @@ export class Home extends Component {
               onRefresh={() => this.getNewInfo()}
             />
           }>
-
+          {/* <EditView
+            // 在组件中使用this.editView即可访拿到EditView组件
+            ref={editView => this.editView = editView}
+            inputText={this.state.EditViewname}
+            titleTxt={'修改XXX'}
+            ensureCallback={EditViewname => this.setState({ EditViewname })}
+          /> */}
           <TopView name={userInfo.clientName} mobile={userInfo.mobile} imageUrl={roleInfo.headPortraitsUrl} userInfo={userInfo} workerInfo={roleInfo} />
           <View style={styles.subcontainer}>
             <RowFunc source={require('./images/ic_wdjs.png')} text="班級管理" onPress={() => jump('/class/administration')} />
             {/* jump('/mine/account/authentication') 身份认证待开发 */}
             <RowFunc source={require('./images/ic_sfrz.png')} text="弹窗" onPress={() => this._noFinishing()} />
+            <RowFunc source={require('./images/ic_sfrz.png')} text="邀请老师弹窗" onPress={() => this._noteacher()} />
             {roleInfo.role == 1 ? <RowFunc source={require('./images/ic_wdgz.png')} text="我的工种" onPress={() => jump('/mine/skill')} desc={workerKindArr.join(' ') ? '已选' : "未选"} descStyle={styles.descstyle} /> : null}
             {roleInfo.role == 1 ? <RowFunc source={require('./images/ic_wdzs.png')} text="我的证书" onPress={() => jump('/mine/certificate/list', { hasHeader: false, userId: userInfo.userId })} /> : null}
             {roleInfo.role == 1 ? <RowFunc source={require('./images/ic_wdxs.png')} text="我的协商" onPress={() => jump('/negotiate/list', { userId: userInfo.userId, roleId: 4 })} /> : null}
