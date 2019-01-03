@@ -29,14 +29,14 @@ export class NavScene extends Scene{
 export function getNavigationBarStyle() {
   if(Platform.OS == "ios") {
     return {
-      backgroundColor:  "#6F6F6F",
+      backgroundColor:  color.c6,
       borderBottomWidth: 0,
     };
   } 
 
   if(Platform.OS == "android") {
     return {
-      backgroundColor: "#6F6F6F",
+      backgroundColor: color.c6,
       borderBottomWidth: 0,
       elevation: 0,
       height: 44
@@ -46,7 +46,9 @@ export function getNavigationBarStyle() {
 
 export function getTitleStyle() {
   if(Platform.OS == "ios") {
-    return {};
+    return {
+      color: '#FFFFFF'
+    };
   } 
 
   if(Platform.OS == "android") {
@@ -57,7 +59,7 @@ export function getTitleStyle() {
       fontSize: font["f8"],
       color: color["c2"],
       fontWeight: "normal",
-    
+      color: '#FFFFFF'
     }
   }
 }

@@ -11,6 +11,7 @@ import {
   Mine, MineNews, MineNewsDetail, PatriarchTwoInformation,
   HomeworkList, HomeworkDetail, AudioExample,
   ClassList,
+  ClassMember,
 } from './pages'
 import { jump, pop, close, back, popTo, replace, reset } from './router';
 import { getUserInfo } from './communication';
@@ -101,7 +102,7 @@ export default class App extends React.Component {
                 back={false}
                 renderBackButton={false}
                 titleStyle={[getTitleStyle(), { color: color.c1 }]}
-                navigationBarStyle={[getNavigationBarStyle(), { backgroundColor: '#6F6F6F' }]}
+                navigationBarStyle={[getNavigationBarStyle(), { backgroundColor: color.c6 }]}
                 onEnter={() => { Actions.refresh({ __refreshType: `tabRefresh`, timestamp: new Date().getTime() }) }}
               />
             </Stack>
@@ -113,7 +114,7 @@ export default class App extends React.Component {
                 back={false}
                 renderBackButton={false}
                 titleStyle={[getTitleStyle(), { color: color.c1 }]}
-                navigationBarStyle={[getNavigationBarStyle(), { backgroundColor: '#6F6F6F' }]}
+                navigationBarStyle={[getNavigationBarStyle(), { backgroundColor: color.c6 }]}
                 onEnter={() => { Actions.refresh({ __refreshType: `tabRefresh`, timestamp: new Date().getTime() }) }}
               />
             </Stack>
@@ -125,7 +126,7 @@ export default class App extends React.Component {
                 back={false}
                 renderBackButton={false}
                 titleStyle={[getTitleStyle(), { color: color.c1 }]}
-                navigationBarStyle={[getNavigationBarStyle(), { backgroundColor: '#6F6F6F' }]}
+                navigationBarStyle={[getNavigationBarStyle(), { backgroundColor: color.c6 }]}
                 renderLeftButton={() => <LeftButton onPress={() => jump('/mine/organ/list')} text='机构管理' textStyle={{ color: color.c1, fontSize: font.f3 }} />}
                 renderRightButton={props => <RightImage onPress={() => jump('/mine/news')} {...props} />}
                 onEnter={() => { Actions.refresh({ __refreshType: `tabRefresh`, timestamp: new Date().getTime() }) }}
@@ -154,6 +155,7 @@ export default class App extends React.Component {
             {/* 班级相关 */}
             {/* <NavScene key="/classes/list" component={ClassList} title="班级列表" /> */}
             <NavScene key="/class/administration" component={ClassAdministration} title="班级管理" />
+            <NavScene key="/class/member" component={ClassMember} title={props => props.title} />
             {/* 我的 相关 */}
             <NavScene key="/mine/setting" component={Setting} title="设置" />
 
