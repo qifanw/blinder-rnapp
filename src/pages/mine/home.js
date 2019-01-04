@@ -3,7 +3,7 @@ import {
   View, Text, StyleSheet, ScrollView, Clipboard, Image, TouchableWithoutFeedback, Alert, Dimensions, RefreshControl
 } from 'react-native';
 import { gap, color, font } from '../../common/standard';
-import { RowFunc, Dialog, Toast, Loading, DialogStudent, EditView,DialogTeacher } from '../../components';
+import { RowFunc, Dialog, Toast, Loading, DialogStudent, EditView } from '../../components';
 import { jump, jumpApp, jumpRNApp, refresh } from '../../router';
 import { service, logger } from '../../services';
 import { getUserInfo, ENV } from '../../communication'
@@ -28,7 +28,7 @@ export class Home extends Component {
     }
   }
   _noteacher(){
-    DialogTeacher.show("邀请老师", "snasjc", (() => this.oteacher(t)), (() => this.onCopy()))
+    // DialogTeacher.show("邀请老师", "snasjc", (() => this.oteacher(t)), (() => this.onCopy()))
   }
   oteacher(t){
     Toast.show("减肥的减肥---阿监察局-"+t)

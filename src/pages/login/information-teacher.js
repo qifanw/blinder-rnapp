@@ -57,7 +57,7 @@ export class TeacherInformation extends Component {
                 <View style={styles.containerText}>
                     <Text style={styles.text1}> 完善您的身份信息</Text>
                     <Text style={styles.text2}> 身份信息将会在班级中展示对应的权限哦 </Text>
-                    <Image style={styles.Icon} source={require('./images/ic_bank_bh.png')} />
+                    <Image style={styles.Icon} source={require('./images/rn-xiang.png')} />
                     <Text style={styles.text3}> 点击更换头像 </Text>
                 </View>
                 <Text style={styles.text4}> 您所教授的学科：</Text>
@@ -73,8 +73,8 @@ export class TeacherInformation extends Component {
                     />
                 </View>
                 <View style={styles.itemBtnGroupView} >
-                    <RowButton normalStyle={{ backgroundColor: "#707070", borderRadius: 30, }}
-                        underlayColor={color.c70}
+                    <RowButton normalStyle={{ backgroundColor: "#54B4F0", borderRadius: 30, }}
+                        underlayColor={color.c6}
                         text="加入班级" textStyle={{ color: "#FFFFFF", fontSize: 20, }}
                         onPress={() => this.onClink()} />
                 </View>
@@ -96,7 +96,7 @@ class ItemView extends Component {
             <TouchableOpacity style={styles.itemContainer}
                 activeOpacity={1}
                 onPress={() => this.itemClick()} >
-                <View style={[styles.itemTextV, index + 1 >= length ? {} : { marginRight: 42 }, isClick ? { backgroundColor: "#707070" } : { backgroundColor: "#FFFFFF" }]} >
+                <View style={[styles.itemTextV, index + 1 >= length ? {} : { marginRight: 42 }, isClick ? { backgroundColor: "#54B4F0" } : { backgroundColor: "#FFFFFF" }]} >
                     <Text style={[styles.itemText, isClick ? { color: "#FFFFFF" } : { color: "#707070" }]}>{text}</Text>
                 </View>
             </TouchableOpacity>

@@ -37,7 +37,7 @@ export class StudentInformation extends Component {
                 <View style={styles.containerText}>
                     <Text style={styles.text1}> 完善您的身份信息</Text>
                     <Text style={styles.text2}> 身份信息将会在班级中展示对应的权限哦 </Text>
-                    <Image style={styles.Icon} source={require('./images/ic_bank_bh.png')} />
+                    <Image style={styles.Icon} source={require('./images/rn-xiang.png')} />
                     <Text style={styles.text3}> 点击更换头像 </Text>
                     <Text style={styles.itemText}> 您的姓名 </Text>
                     <RowInput ref={c => this._rowName = c} clearShow={false} inputStyle={styles.input} placeholder="请填写真实姓名，不可超过10个字符"  ></RowInput>
