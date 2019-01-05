@@ -27,7 +27,7 @@ export class PatriarchOneInformation extends Component {
             <View style={styles.container}>
                 <View style={styles.containerText}>
                     <Text style={styles.text1}> 完善您的身份信息</Text>
-                    <Image style={styles.Icon} source={require('./images/ic_tx_xq.png')} />
+                    {/* <Image style={styles.Icon} source={require('./images/ic_tx_xq.png')} /> */}
                     <Text style={styles.text3}> 点击更换头像 </Text>
                 </View>
                 <View style={styles.containerText} >

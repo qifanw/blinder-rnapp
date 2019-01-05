@@ -85,7 +85,7 @@ export default class App extends React.Component {
 
           <Tabs
             // key={this.state.userInfo?'home':'tab'}
-            key={this.state.userPackage? 'home' : 'tab'}
+            key={this.state.userPackage? 'tab' : 'home'}
             lazy={true}
             // swipeEnabled
             showLabel={false}
@@ -164,7 +164,7 @@ export default class App extends React.Component {
             {/* 栈底页面，直接退出 */}
             <NavScene key="Bla" component={Bla} back={false} renderBackButton={false} onEnter={props => pop(props)} />
             {/* 登录相关 */}
-            <NavScene key="/login/login-code" component={LoginCode} title="验证码登录" />
+            <NavScene key="/login/login-code" component={LoginCode}    renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled={false}/>
             {/* 老师  完善个人信息 */}
             <NavScene key="/login/TeacherInformation" component={TeacherInformation} renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled={false} />
             {/* 学生  完善个人信息 */}

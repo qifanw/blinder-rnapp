@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {
-    View, Text, StyleSheet, TextInput, ScrollView
+    View, Text, StyleSheet, TextInput, ScrollView,Image,TouchableOpacity
 } from 'react-native';
 import { gap, color, font } from '../../common/standard';
-import { jump, init, refresh } from '../../router'
+import { jump, init, refresh,pop } from '../../router'
 import { initRN } from '../../init';
 import VerifyCode from "./VerifyCodeInput";
 export class LoginCode extends Component {
@@ -28,11 +28,23 @@ export class LoginCode extends Component {
       })
     }
   
+    getCode(){
 
+    }
+    popR(){
+        pop();  
+    }
     render() {
         
         return (
             <View style={styles.container}>
+            <View style={styles.codeView}>
+            <TouchableOpacity  activeOpacity={1} onPress={() => this.popR()}>
+            <Image source={require("./images/rn-fan.png")}  />
+            </TouchableOpacity>
+            <Text  style={styles.textCod}>验证码登录</Text>
+            </View>
+            
                 <Text style={styles.text}>{this.state.codeText}</Text>
                 {/* 验证码输入框 */}
                 <View style={styles.inputView}>
@@ -44,9 +56,9 @@ export class LoginCode extends Component {
                     />
 
                 </View>
-                <View  style={styles.textCodeV}>
+                <TouchableOpacity  style={styles.textCodeV} activeOpacity={1} onPress={() => this.getCode()}>
                 <Text  style={styles.textCode}>重新发送验证码</Text>
-                </View>
+                </TouchableOpacity>
                
             </View>
         )
@@ -56,8 +68,19 @@ export class LoginCode extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#FFFFFF",
     },
-
+    codeView:{
+        flexDirection: 'row',
+        marginLeft: 19,
+        marginTop: 21,
+        alignItems:'center', // 交叉轴中点对齐
+    },
+    textCod:{
+        color: color.c70,
+        fontSize: 25,
+        marginLeft: 20,
+    },
     text: {
         color: color.c70,
         fontSize: font.f4,

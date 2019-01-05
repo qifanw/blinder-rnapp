@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    View, Text, StyleSheet, Image, TextInput, TouchableOpacity
+    View, Text, StyleSheet, Image, TextInput, TouchableOpacity,ImageBackground 
 } from 'react-native';
 import { jump, init, refresh } from '../../router'
 import { initRN } from '../../init';
@@ -10,6 +10,9 @@ import { color, font, gap } from '../../common/standard'
 
 import LocalStorage from '../../common/localstorage'
 const instance = LocalStorage.getInstance();
+
+var Dimensions = require('Dimensions');
+var { width, height } = Dimensions.get('window');
 export class Login extends Component {
     constructor(props) {
         super(props);
@@ -50,9 +53,9 @@ export class Login extends Component {
         else {
             instance.setItem("userPackage","hooo")
          //   setItem("userPackage", 1)
-           jump("tab")
+        //    jump("tab")
             // jump('/login/login-code', { phone: this.state.phone })
-            // jump('/login/PatriarchOneInformation')
+            jump('/login/TeacherInformation')
         }
 
     }
@@ -72,10 +75,17 @@ export class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Image style={styles.Icon} source={require('./images/ic_bank_bh.png')} />
-                <Image style={styles.imgIcon} source={require('./images/ic_bank_bh.png')} />
+            <ImageBackground  style={styles.ImgItemSty}  source={require('./images/rn-bei.png')} >
+            <Image style={styles.Icon} source={require('./images/rn-huan.png')} />
+            <View style={styles.imgIconView}>
+            <Image style={styles.imgIcon} source={require('./images/rn-tou.png')} />
+            </View>
+            </ImageBackground>
+            <View style={styles.imgIconView}>
+               <Image style={styles.imgIcon} source={require('./images/rn-yan.png')} />
+            </View>
                 <View style={styles.viewPhone} >
-                    <Image source={require('./images/ic_bank_bh.png')} />
+                    <Image source={require('./images/rn-shou.png')} />
                     {/* <RowInput  maxLength={11} clearShow ={false} ref={c => this._rowInput3 = c} inputStyle={styles.input} placeholder="请输入您的手机号"  keyboardType="numeric" ></RowInput> */}
                     <TextInput style={styles.input}
                         placeholder="请输入您的手机号"
@@ -90,13 +100,16 @@ export class Login extends Component {
                         onChangeText={value => this.handleInputChange(value)}
                     ></TextInput>
                     {this.state.clearShow && <TouchableOpacity activeOpacity={1} style={styles.labelClear} onPress={() => this.handleClear()}>
-                        <Image source={require("./images/ic_srkch.png")} />
+                        <Image source={require("./images/rn-cha.png")} />
                     </TouchableOpacity>}
 
                 </View>
+                <View tyle={styles.imgIconView}>
                 <Text style={styles.text}>若该手机号尚未注册，我们会自动为您注册</Text>
+                </View>
+              
                 <View style={styles.itemBtnGroupView} >
-                    <RowButton normalStyle={{ backgroundColor: "#707070", borderRadius: 30, }}
+                    <RowButton normalStyle={{ backgroundColor: "#54B4F0", borderRadius: 30, }}
                     underlayColor={color.c70}
                         text="下一步" textStyle={{ color: "#FFFFFF", fontSize: 20, }}
                         onPress={() => this.onClink()} />
@@ -112,18 +125,22 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFFFFF",
     },
     Icon: {
-        marginTop: 108,
-        marginLeft: 42,
+        marginTop: 92,
+        marginLeft: 41,
     },
     imgIcon: {
-        marginTop: 24,
-        marginLeft: 42,
+      //  marginTop: 24,
+      //  marginLeft: 107,
+    },
+    imgIconView:{
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     viewPhone: {
         flexDirection: "row",
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: 94,
+        marginTop: 36,
         marginLeft: 42,
         marginRight: 34,
         borderColor: "#707070",
@@ -143,18 +160,21 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 12,
         color: "#707070",
-        marginTop: 4,
-        marginLeft: 46,
+       // marginTop: 4,
+       marginLeft: 46,
 
     },
     itemBtnGroupView: {
-        marginTop: 86,
-        marginRight: 44,
-        marginLeft: 44,
+        marginTop: 61,
+        marginRight: 35,
+        marginLeft: 35,
         //    marginBottom: 60
 
     },
     disabledStyle: {
         borderRadius: 15,
+    },
+    ImgItemSty:{
+        width: width,
     }
 });

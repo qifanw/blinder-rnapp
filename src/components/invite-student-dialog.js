@@ -20,7 +20,7 @@ import RootSiblings from 'react-native-root-siblings';
 
 const { width, height } = Dimensions.get('window');
 
-export class DialogInvite extends Component {
+export class DialogStudent extends Component {
     constructor(props) {
         super(props)
     }

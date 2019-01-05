@@ -12,13 +12,13 @@ export class PatriarchTwoInformation extends Component {
         super(props);
         this.state = {
             listData: [
-                { id: 0, text: '爸爸', image: require('./images/ic_tx_xq.png'), isClick: false },
-                { id: 1, text: '妈妈', image: require('./images/ic_tx_xq.png'), isClick: false },
-                { id: 2, text: '姥姥（外婆）', image: require('./images/ic_tx_xq.png'), isClick: false },
-                { id: 3, text: '姥爷（外公）', image: require('./images/ic_tx_xq.png'), isClick: false },
-                { id: 4, text: '爷爷', image: require('./images/ic_tx_xq.png'), isClick: false },
-                { id: 5, text: '奶奶', image: require('./images/ic_tx_xq.png'), isClick: false },
-                { id: 6, text: '其他监护人', image: require('./images/ic_tx_xq.png'), isClick: false },
+                { id: 0, text: '爸爸', image: require('./images/rn-yan.png'), isClick: false },
+                { id: 1, text: '妈妈', image: require('./images/rn-yan.png'), isClick: false },
+                { id: 2, text: '姥姥（外婆）', image: require('./images/rn-yan.png'), isClick: false },
+                { id: 3, text: '姥爷（外公）', image: require('./images/rn-yan.png'), isClick: false },
+                { id: 4, text: '爷爷', image: require('./images/rn-yan.png'), isClick: false },
+                { id: 5, text: '奶奶', image: require('./images/rn-yan.png'), isClick: false },
+                { id: 6, text: '其他监护人', image: require('./images/rn-yan.png'), isClick: false },
             ],
         };
     }
