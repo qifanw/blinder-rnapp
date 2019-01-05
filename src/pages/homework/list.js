@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {
     View, Text, StyleSheet, FlatList, TouchableOpacity, Dimensions, Image
 } from 'react-native';
-import { jump, init, refresh } from '../../router'
-import { initRN } from '../../init';
+import { gap, color, font } from '../../common/standard';
+
 export class HomeworkList extends Component {
     constructor(props) {
         super(props);
@@ -45,11 +45,11 @@ class ListItem extends Component {
         return (
             <TouchableOpacity style={styles.rowViewStyle} onPress={() => this.itemAction()}>
                 <View style={{
-                    flex: 1, flexDirection: 'row', alignItems: 'center', backgroundColor: '#979797',
+                    flex: 1, flexDirection: 'row', alignItems: 'center', backgroundColor: color.c1,
                     borderRadius: 12
                 }}>
                     <View style={[styles.bgViewStyle, {marginLeft:5, width: 65 ,alignItems:'center'}]}>
-                        <Image style={{ width: 41, height: 41, backgroundColor: 'white',marginTop:5 }} />
+                        <Image source={require('./images/classPlaceholder.png')} style={{ marginTop:5 }} />
                         <Text style={[styles.textStyle,{fontSize:12,marginTop:5}]}>一班</Text>
                     </View>
                     <View style={[styles.bgViewStyle]}>
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     textStyle: {
-        color: '#FFFFFF',
+        color: color.c3,
         fontSize: 18,
     }
 });

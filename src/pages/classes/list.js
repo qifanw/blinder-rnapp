@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {
     View, Text, StyleSheet, FlatList, TouchableOpacity, Dimensions, Image
 } from 'react-native';
-import { jump, init, refresh } from '../../router'
-import { initRN } from '../../init';
+import { gap, color, font } from '../../common/standard';
 export class ClassList extends Component {
     constructor(props) {
         super(props);
@@ -43,18 +42,18 @@ class ListItem extends Component {
         return (
             <TouchableOpacity style={styles.rowViewStyle} onPress={() => this.itemAction()}>
                 <View style={{
-                    flex: 1, flexDirection: 'row', alignItems: 'center', backgroundColor: '#979797',
+                    flex: 1, flexDirection: 'row', alignItems: 'center', backgroundColor: color.c1,
                     borderRadius: 12
                 }}>
                     <View style={[styles.bgViewStyle, { justifyContent: 'center', width: 65, alignItems: 'center' }]}>
-                        <Image style={{ width: 41, height: 41, backgroundColor: 'white', marginTop: 5 }} />
+                        <Image  source = {require('./images/classPlaceholder.png')} style={{ marginTop: 5 }} />
                     </View>
                     <View style={[styles.bgViewStyle]}>
                         <Text style={styles.textStyle}>初二一班</Text>
                         <Text style={[styles.textStyle, { fontSize: 12, marginTop: 5 }]}>教师30人 学生60人</Text>
                     </View>
-                    {id == 1 ? <TouchableOpacity style={{ width: 71, height: 34, borderRadius: 8, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', shadowColor:'#000000',shadowOffset:{width:0,height:3},shadowOpacity:0.16,elevation:4}}>
-                        <Text style={{ fontSize: 18, color:'#6F6F6F'}}>加入</Text>
+                    {id == 1 ? <TouchableOpacity style={{ width: 71, height: 34, borderRadius: 8, backgroundColor: color.c6, justifyContent: 'center', alignItems: 'center', shadowColor:'#000000',shadowOffset:{width:0,height:3},shadowOpacity:0.16,elevation:4}}>
+                        <Text style={{ fontSize: 18, color:color.c1}}>加入</Text>
                     </TouchableOpacity>:<Image source={require('../../components/images/ic_ejjt.png')} style={{ marginLeft: 65 }} />}
                 </View>
             </TouchableOpacity>
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     textStyle: {
-        color: '#FFFFFF',
+        color: color.c3,
         fontSize: 18,
     }
 });

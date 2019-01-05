@@ -5,7 +5,8 @@ export const color = {
   c3: "#000000",
   //text 浅色
   c4: "#999",
-  c5: "#ccc",
+  //textiputPlace
+  c5: "#707070",
   //导航条主色
   c6: "#54B4F0",
   //分割线颜色

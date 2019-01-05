@@ -12,6 +12,7 @@ import {
   HomeworkList, HomeworkDetail, AudioExample,
   ClassList,
   ClassMember,
+  ReleaseHomework,
 } from './pages'
 import { jump, pop, close, back, popTo, replace, reset } from './router';
 import { getUserInfo } from './communication';
@@ -94,9 +95,8 @@ export default class App extends React.Component {
             inactiveBackgroundColor={color.c1}
           >
             {/* 首页 */}
-            <Stack key="tab_first" title="作业列表" icon={TabIcon} image={require('./images/ic_sy.png')} activeImage={require('./images/ic_sjax.png')}>
+            <Stack key="tab_first" title="作业中心" icon={TabIcon} image={require('./images/homecenter.png')} activeImage={require('./images/homecenter.png')}>
               <NavScene
-                // key="/work"
                 key="/home"
                 component={HomeworkList}
                 back={false}
@@ -107,7 +107,7 @@ export default class App extends React.Component {
               />
             </Stack>
             {/* 班级列表 */}
-            <Stack key="tab_second" title="班级列表" icon={customTabIcon} image={require('./pages/homework/images/胶片盘.png')} activeImage={require('./images/ic_sjax.png')}>
+            <Stack key="tab_second" title="班级" icon={TabIcon} image={require('./images/group.png')} activeImage={require('./images/group.png')}>
               <NavScene
                 key="/classlist"
                 component={ClassList}
@@ -118,8 +118,35 @@ export default class App extends React.Component {
                 onEnter={() => { Actions.refresh({ __refreshType: `tabRefresh`, timestamp: new Date().getTime() }) }}
               />
             </Stack>
+            {/* 发布作业*/ }
+            <Stack key="tab_third" title="" icon={customTabIcon} image={require('./images/homework.png')} activeImage={require('./images/homework.png')}>
+              <NavScene
+                key="/homework/release"
+                title="发布作业"
+                component={ReleaseHomework}
+                back={false}
+                renderBackButton={false}
+                titleStyle={[getTitleStyle(), { color: color.c1 }]}
+                navigationBarStyle={[getNavigationBarStyle(), { backgroundColor: color.c6 }]}
+                onEnter={() => { Actions.refresh({ __refreshType: `tabRefresh`, timestamp: new Date().getTime() }) }}
+              />
+            </Stack>
+            {/* 聊天 */}
+            <Stack key="tab_forth" title="聊天" icon={TabIcon} image={require('./images/message.png')} activeImage={require('./images/message.png')}>
+              <NavScene
+                key="/message"
+                component={Mine}
+                back={false}
+                renderBackButton={false}
+                titleStyle={[getTitleStyle(), { color: color.c1 }]}
+                navigationBarStyle={[getNavigationBarStyle(), { backgroundColor: color.c6 }]}
+                renderLeftButton={() => <LeftButton onPress={() => jump('/mine/organ/list')} text='机构管理' textStyle={{ color: color.c1, fontSize: font.f3 }} />}
+                renderRightButton={props => <RightImage onPress={() => jump('/mine/news')} {...props} />}
+                onEnter={() => { Actions.refresh({ __refreshType: `tabRefresh`, timestamp: new Date().getTime() }) }}
+              />
+            </Stack>
             {/* 我的 */}
-            <Stack key="tab_third" title="我的" icon={TabIcon} image={require('./images/ic_wd.png')} activeImage={require('./images/ic_wdax.png')}>
+            <Stack key="tab_fifth" title="我的" icon={TabIcon} image={require('./images/personcenter.png')} activeImage={require('./images/personcenter.png')}>
               <NavScene
                 key="/mine"
                 component={Mine}
@@ -203,12 +230,11 @@ const styles = StyleSheet.create({
   },
   coustomTabView: {
     alignItems: 'center',
-    backgroundColor: 'white',
     position: 'absolute',
     bottom: 0,
-    width: 100,
-    height: 100,
-    borderRadius: 50
+    width: 80,
+    height: 80,
+    borderRadius: 40
   },
   text: {
     color: color["c2"],
