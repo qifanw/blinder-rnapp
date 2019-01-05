@@ -49,6 +49,7 @@ export class TeacherInformation extends Component {
             }
 
         }
+        jump("tab")
     }
     render() {
 
