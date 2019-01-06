@@ -84,8 +84,8 @@ export default class App extends React.Component {
           <NavScene key="home" component={Login} renderBackButton={false} hideNavBar={true} back={false} gesturesEnabled={false} />
 
           <Tabs
-            // key={this.state.userInfo?'home':'tab'}
-            key={this.state.userPackage? 'tab' : 'home'}
+            key='home'
+            // key={this.state.userPackage? 'tab' : 'home'}
             lazy={true}
             // swipeEnabled
             showLabel={false}

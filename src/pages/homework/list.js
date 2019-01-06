@@ -3,6 +3,7 @@ import {
     View, Text, StyleSheet, FlatList, TouchableOpacity, Dimensions, Image
 } from 'react-native';
 import { gap, color, font } from '../../common/standard';
+import { jump, jumpApp, jumpRNApp, refresh } from '../../router';
 
 export class HomeworkList extends Component {
     constructor(props) {
@@ -26,8 +27,8 @@ export class HomeworkList extends Component {
                     keyExtractor={(item, index) => index + ''}
                 >
                 </FlatList>
-                {/* <Text onPress={() => jump('/homework/detail')}> jump to HomeworkDetail </Text>
-                <Text onPress={() => jump('/homework/recode')}> jump to audioStemp </Text> */}
+                <Text onPress={() => jump('/homework/detail')}> jump to HomeworkDetail </Text>
+                <Text onPress={() => jump('/homework/recode')}> jump to audioStemp </Text>
             </View>
         )
     }
