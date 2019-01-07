@@ -7,12 +7,13 @@ import { RowFunc, Dialog, Toast, Loading, DialogInvite,RowButton } from '../../c
 import { jump, jumpApp, jumpRNApp, refresh } from '../../router';
 import { service, logger } from '../../services';
 import Picker from 'react-native-picker';
+import DatePicker from 'react-native-datepicker';
 export class ReleaseHomework extends Component {
     constructor(props) {
         super(props);
         this.state = {
             dataArr: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
-            finishTime:'',
+            datetime: '',
         }
     }
     componentDidMount() {
@@ -20,95 +21,6 @@ export class ReleaseHomework extends Component {
     }
     onClink(){
 
-    }
-    DateToStr(dateArry) {
-
-        let title = dateArry.toString();
-        let reg = /[\u4E00-\u9FA5]/g;
-        let result = title.replace(reg, '').split(',');
-
-        let [year, month, day] = result;
-        if (day.length <= 1) {
-
-            day = "0" + day;
-        }
-
-        if (month.length <= 1) {
-
-            month = "0" + month;
-        }
-
-        let last = [year, month, day].join('/');
-
-        return last;
-    }
-    _createDateData() {
-        let date = [];
-        for (let i = 2019; i < 2100; i++) {
-            let month = [];
-            for (let j = 1; j < 13; j++) {
-                let day = [];
-                if (j === 2) {
-                    for (let k = 1; k < 29; k++) {
-                        day.push(k + '');
-                    }
-                    //Leap day for years that are divisible by 4, such as 2000, 2004
-                    if (i % 4 === 0) {
-                        day.push(29 + '');
-                    }
-                }
-                else if (j in { 1: 1, 3: 1, 5: 1, 7: 1, 8: 1, 10: 1, 12: 1 }) {
-                    for (let k = 1; k < 32; k++) {
-                        day.push(k + '');
-                    }
-                }
-                else {
-                    for (let k = 1; k < 31; k++) {
-                        day.push(k + '');
-                    }
-                }
-                let _month = {};
-                _month[j + ''] = day;
-                month.push(_month);
-            }
-            let _date = {};
-            _date[i + ''] = month;
-            date.push(_date);
-        }
-        return date;
-    }
-    showDatePicker(){
-        var date = new Date();
-        var year = date.getFullYear() + '';
-        var month = date.getMonth() + 1 + "";
-        var date = date.getDate() + '';
-        Picker.init({
-            pickerData: this._createDateData(),
-            pickerFontColor: [255, 144, 0, 1],
-            pickerConfirmBtnText: '确定',
-            pickerToolBarFontSize: 16,
-            pickerRowHeight: 30,
-            pickerCancelBtnText: '取消',
-            pickerFontSize: 20,
-            pickerBg: [255, 255, 255, 255],
-            pickerToolBarBg: [255, 255, 255, 255],
-            pickerTitleText: '选择时间',
-            selectedValue: [year, month, date],
-            pickerFontFamily: '微软雅黑", "宋体", Arial, Helvetica, sans-serif',
-            pickerTextEllipsisLen: 12,
-            onPickerConfirm: (pickedValue, pickedIndex) => {
-                let pickedValueStr = this.DateToStr(pickedValue);
-                this.setState({
-                    finishTime:pickedValueStr,
-                });
-            },
-            onPickerCancel: (pickedValue, pickedIndex) => {
-                this.setState({
-                    
-                });
-            },
-        });
-        Picker.show();
     }
     render() {
         const { dataArr,finishTime } = this.state
@@ -132,17 +44,25 @@ export class ReleaseHomework extends Component {
                     </FlatList>
                 </View>
                 <View style={{ marginTop: 15, marginLeft: 10, marginRight: 10, height: 50, backgroundColor: color.c1, alignItems: 'center', borderRadius: 12,flexDirection:'row',justifyContent:'space-around' }}>
-                    <Text style={styles.textStyle}>{finishTime==='' ? '设置最晚提交时间：2019/12/29 14:00' :'设置最晚提交时间：'+finishTime} </Text>
-                    <TouchableOpacity onPress={() => this.showDatePicker()}>
-                        <Image  source={require('./images/calendar.png')}/>
-                    </TouchableOpacity>
+                    <Text style={styles.textStyle}>设置最晚提交时间:</Text>
+                        <DatePicker
+                            style={{width:200}}
+                            date={this.state.datetime}
+                            mode="datetime"
+                            format="YYYY-MM-DD HH:mm"
+                            confirmBtnText="确定"
+                            cancelBtnText="取消"
+                            showIcon={true}
+                            iconSource={require('./images/calendar.png')}
+                            onDateChange={(datetime) => { this.setState({ datetime: datetime }); }}
+                        />
                 </View>
                 <View style={styles.teachViewStyle}>
                     <View style={{ flexDirection: 'row', margin: 15 }}>
                         <Text style={{ fontSize: 14, color: color.c5 }}>输入背诵文本</Text>
                     </View>
                     <View style={{ marginLeft: 10, marginRight: 10, height: 1, backgroundColor: color.c7 }}></View>
-                    <TextInput style = {{fontSize: 12,color:color.c3,margin:15,height:144,textAlignVertical:'top'}} placeholder='请手动输入/复制粘贴背诵文章内容'></TextInput>
+                        <TextInput style={{ fontSize: 12, color: color.c3, margin: 15, height: 144, textAlignVertical: 'top' }} multiline={true} placeholder='请手动输入/复制粘贴背诵文章内容'></TextInput>
                 </View>
                 <RowButton normalStyle={{ backgroundColor: "#54B4F0", borderRadius: 30,marginTop:10,marginLeft:80,marginRight:80}}
                         underlayColor={color.c70}
